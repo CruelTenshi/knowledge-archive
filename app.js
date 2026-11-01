@@ -259,9 +259,9 @@
     document.title = isList ? `${state.query ? "문서 검색" : "전체 문서"} — 지식 아카이브` : "지식 아카이브 — 나의 지식이 연결되는 곳";
     if (isList) renderList(state, version); else updateHome();
   }
-  function submitSearch() {
+  function submitSearch(input = $("search-input")) {
     clearTimeout(searchTimer);
-    const value = $("search-input").value.trim();
+    const value = input.value.trim();
     const state = route();
     const params = new URLSearchParams();
     if (value) params.set("q", value);
@@ -278,6 +278,11 @@
     if (pool.length) location.hash = docHref(pool[Math.floor(Math.random() * pool.length)]);
   }
   $("search-form").addEventListener("submit", event => { event.preventDefault(); submitSearch(); });
+  $("document-search-form").addEventListener("submit", event => {
+    event.preventDefault();
+    if (!$("document-search-input").value.trim()) return;
+    submitSearch($("document-search-input"));
+  });
   $("search-input").addEventListener("input", event => { clearTimeout(searchTimer); if (!event.isComposing) searchTimer = setTimeout(submitSearch, 350); });
   $("search-input").addEventListener("compositionend", () => { clearTimeout(searchTimer); searchTimer = setTimeout(submitSearch, 350); });
   $("reshuffle-button").addEventListener("click", () => { refreshDay(); home = C.selectHome(articles, currentDay); updateHome(); announce("우연한 발견 문서를 다시 뽑았습니다."); });
