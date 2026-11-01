@@ -38,10 +38,36 @@
     return { daily, random: shuffle(canonical.filter(article => !dailyIds.has(article.id)), random).slice(0, 4) };
   }
   function normalize(value) { return String(value).normalize("NFKC").toLocaleLowerCase("ko").replace(/\s+/g, " ").trim(); }
+  function createArticleIndex(articles, redirects = [], baseURL) {
+    const byId = new Map();
+    const byName = new Map();
+    const byPath = new Map();
+    for (const article of articles) {
+      const entry = { article, section: "" };
+      byId.set(article.id, entry);
+      byName.set(normalize(article.title), entry);
+      byPath.set(new URL(article.file, baseURL).href, entry);
+    }
+    for (const redirect of redirects) {
+      const canonical = byId.get(redirect.target);
+      if (!canonical) continue;
+      const entry = { article: canonical.article, section: redirect.section || "" };
+      if (!byId.has(redirect.id)) byId.set(redirect.id, entry);
+      if (!byName.has(normalize(redirect.title))) byName.set(normalize(redirect.title), entry);
+      const oldPath = new URL(redirect.file, baseURL).href;
+      if (!byPath.has(oldPath)) byPath.set(oldPath, entry);
+    }
+    return { byId, byName, byPath };
+  }
   function matches(article, query, body = "") {
     const haystack = normalize([article.title, article.summary || "", ...(article.tags || []), body].join(" "));
     return normalize(query).split(" ").filter(Boolean).every(term => haystack.includes(term));
   }
+  function collectTags(articles) {
+    return [...new Set(articles.flatMap(article => article.tags || []).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, "ko", { numeric: true, sensitivity: "base" }));
+  }
+  function matchesTag(article, tag) { return !tag || (article.tags || []).includes(tag); }
   function sortByName(articles) { return [...articles].sort((a, b) => a.title.localeCompare(b.title, "ko", { numeric: true, sensitivity: "base" })); }
   function sortByUpdated(articles) {
     const timestamp = article => {
@@ -54,7 +80,7 @@
     });
   }
   function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
-  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, matches, sortByName, sortByUpdated, escapeHTML };
+  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, createArticleIndex, matches, collectTags, matchesTag, sortByName, sortByUpdated, escapeHTML };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.ArchiveCore = Object.freeze(api);
 })(globalThis);

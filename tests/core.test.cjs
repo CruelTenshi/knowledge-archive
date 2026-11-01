@@ -53,6 +53,20 @@ test("검색은 한글 정규화·대소문자·여러 단어·본문을 처리�
   assert.equal(C.matches(doc, "예시 없는단어"), false);
   assert.equal(C.matches(doc, "마크다운"), true);
 });
+test("태그는 실제 등록값에서 중복 없이 정렬되며 필터는 검색과 함께 정확히 일치한다", () => {
+  const docs = [
+    { title: "안보", tags: ["국제정치", "안보", "국제정치"] },
+    { title: "공공재", tags: ["경제학", "국제정치경제"] },
+    { title: "태그 없음" }
+  ];
+  assert.deepEqual(C.collectTags(docs), ["경제학", "국제정치", "국제정치경제", "안보"]);
+  assert.deepEqual(C.collectTags([]), []);
+  assert.equal(C.matchesTag(docs[0], "국제정치"), true);
+  assert.equal(C.matchesTag(docs[1], "국제정치"), false);
+  assert.equal(C.matchesTag(docs[2], "안보"), false);
+  assert.equal(C.matchesTag(docs[2], ""), true);
+  assert.deepEqual(docs.filter(d => C.matchesTag(d, "국제정치") && C.matches(d, "억제", "핵억제")), [docs[0]]);
+});
 test("모든 등록 문서는 중복 없는 ID와 실제 md 원본을 갖는다", async () => {
   const context = { window: {} };
   vm.runInNewContext(await fs.readFile(path.join(root, "db.js"), "utf8"), context);
@@ -63,6 +77,51 @@ test("모든 등록 문서는 중복 없는 ID와 실제 md 원본을 갖는다"
     assert.equal(path.extname(article.file), ".md");
     const source = await fs.readFile(path.join(root, "db", article.file), "utf8");
     assert.ok(source.startsWith("# "));
+  }
+});
+test("통합·개명 전 ID·제목·파일 링크는 새 문서와 통합 절로 연결된다", async () => {
+  const context = { window: {} };
+  vm.runInNewContext(await fs.readFile(path.join(root, "db.js"), "utf8"), context);
+  const { articles, redirects } = context.window.KNOWLEDGE_DB;
+  const baseURL = "https://archive.example/db/";
+  const index = C.createArticleIndex(articles, redirects, baseURL);
+  for (const redirect of redirects) {
+    assert.ok(articles.some(article => article.id === redirect.target), redirect.id);
+    for (const entry of [index.byId.get(redirect.id), index.byName.get(C.normalize(redirect.title)), index.byPath.get(new URL(redirect.file, baseURL).href)]) {
+      assert.equal(entry.article.id, redirect.target);
+      if (redirect.id !== redirect.target) assert.equal(entry.section, redirect.section);
+    }
+    if (redirect.section) {
+      const source = await fs.readFile(path.join(root, "db", index.byId.get(redirect.target).article.file), "utf8");
+      assert.ok(source.split("\n").includes(`## ${redirect.section}`), redirect.section);
+    }
+  }
+  assert.equal(index.byId.get("ai-governance").article.title, "AI 경영");
+  assert.equal(index.byId.get("esg").article.title, "기업 윤리");
+  assert.equal(index.byId.get("business-ethics").section, "");
+});
+test("문서 제목·목록·위키 링크와 절 참조가 정리된 구조와 일치한다", async () => {
+  const context = { window: {} };
+  vm.runInNewContext(await fs.readFile(path.join(root, "db.js"), "utf8"), context);
+  const { articles, redirects } = context.window.KNOWLEDGE_DB;
+  const index = C.createArticleIndex(articles, redirects, "https://archive.example/db/");
+  const sources = new Map(await Promise.all(articles.map(async article => [article.id, await fs.readFile(path.join(root, "db", article.file), "utf8")])));
+  assert.equal(new Set(articles.map(article => article.title)).size, articles.length);
+  assert.equal(new Set(articles.map(article => article.file)).size, articles.length);
+  const files = (await fs.readdir(path.join(root, "db"))).filter(file => file.endsWith(".md")).sort();
+  assert.deepEqual(files, Array.from(articles, article => article.file).sort());
+  for (const article of articles) {
+    const source = sources.get(article.id);
+    assert.equal(source.split("\n")[0], `# ${article.title}`);
+    for (const match of source.matchAll(/\[\[([^\]\n]+)\]\]/g)) {
+      const [reference] = match[1].split("|");
+      const [target, section] = reference.split("#");
+      const entry = target ? index.byId.get(target) || index.byName.get(C.normalize(target)) : index.byId.get(article.id);
+      assert.ok(entry, `${article.title}: ${reference}`);
+      if (section) {
+        assert.ok(sources.get(entry.article.id).split("\n").some(line => /^#{1,6} /.test(line) && C.normalize(line.replace(/^#+ /, "")) === C.normalize(section)), `${article.title}: ${reference}`);
+      }
+    }
   }
 });
 test("HTTP에서 md를 읽고, 실패한 읽기는 다음 호출에서 재시도한다", async () => {

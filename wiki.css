@@ -28,5 +28,11 @@
 @media(max-width:370px){.page,.header-inner{padding-left:15px;padding-right:15px}.knowledge-site .brand{font-size:16px;gap:6px}.knowledge-site .brand-mark{width:25px;height:25px}.header-inner{gap:8px}.document-grid{grid-template-columns:1fr}.document-card h3{font-size:17px}.document-tags span{font-size:9px}.knowledge-site .archive-title{font-size:36px}.all-documents-link>span{display:none}.personal-label{display:none}}
 @media(prefers-reduced-motion:reduce){.document-card:hover,.document-card:focus-visible{transform:none}}
 @media(max-width:650px){.sort-controls select{width:132px}}
+#home-view>.daily-section:first-child{margin-top:35px;padding-top:0;border-top:0}
+#home-view>.document-section+.document-section{margin-top:39px;padding-top:29px;border-top:1px solid #203051}
+.header-actions kbd{font:10px var(--mono);border:1px solid currentColor;border-radius:3px;padding:1px 4px;opacity:.75}
+.sort-controls{flex-wrap:wrap;justify-content:flex-end}
+#tag-filter{max-width:210px;width:180px}
+@media(max-width:650px){.list-heading{flex-wrap:wrap}.list-heading .sort-controls{width:100%;justify-content:flex-start}#tag-filter{max-width:calc(100vw - 205px);min-width:120px;width:180px}#home-view>.daily-section:first-child{margin-top:26px}#home-view>.document-section+.document-section{margin-top:30px;padding-top:25px}}
 .toc-number{color:var(--cyan);font-family:var(--mono);font-size:10px}.toc-depth-1{padding-left:12px}.toc-depth-2{padding-left:24px}.toc-depth-3{padding-left:36px}.toc-depth-4{padding-left:48px}.toc-depth-5{padding-left:60px}
 .markdown-body .math-source{color:var(--text)}.markdown-body div.math-source{overflow-x:auto;overflow-y:hidden;margin:22px 0;padding:8px 0}.markdown-body .katex{font-size:1.12em}.markdown-body .katex-display{margin:.5em 0}.markdown-body .footnotes{border-top:1px solid var(--line);margin-top:38px;padding-top:20px;font-size:12px}.markdown-body .footnotes-heading{font-size:16px;margin:0 0 15px;border:0;padding:0}.markdown-body .footnotes-heading:before{content:none}.markdown-body .footnotes li,.markdown-body [data-footnote-ref]{scroll-margin-top:24px}.markdown-body .footnotes p{margin-bottom:8px}.markdown-body [data-footnote-ref]{font:10px var(--mono);text-decoration:none}.markdown-body [data-footnote-backref]{margin-left:7px}

@@ -5,11 +5,10 @@
   const $ = id => document.getElementById(id);
   const esc = C.escapeHTML;
   const articles = db.articles;
-  const byId = new Map(articles.map(article => [article.id, article]));
-  const byName = new Map(articles.map(article => [C.normalize(article.title), article]));
+  const tags = C.collectTags(articles);
   const baseURL = new URL("./db/", location.href);
   const articleURL = article => new URL(article.file, baseURL);
-  const byPath = new Map(articles.map(article => [articleURL(article).href, article]));
+  const { byId, byName, byPath } = C.createArticleIndex(articles, db.redirects, baseURL);
   const store = window.ArchiveDocumentStore.createStore({
     baseURL,
     fetch: window.fetch.bind(window)
@@ -30,7 +29,7 @@
     const params = new URLSearchParams(query);
     let id = "";
     try { id = decodeURIComponent(path.slice(5)); } catch { /* 잘못된 주소는 없는 문서로 표시 */ }
-    return { path, params, id, query: params.get("q") || "", sort: ["random", "updated"].includes(params.get("sort")) ? params.get("sort") : "name" };
+    return { path, params, id, query: params.get("q") || "", tag: params.get("tag") || "", sort: ["random", "updated"].includes(params.get("sort")) ? params.get("sort") : "name" };
   }
   function card(article, index) {
     return `<a class="document-card" href="${esc(docHref(article))}"><span class="card-fx" aria-hidden="true"></span><div class="document-card-top"><span class="document-tags">${article.tags.map(tag => `<span>${esc(tag)}</span>`).join("")}</span><span class="document-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span></div><h3>${esc(article.title)}</h3><p>${esc(article.summary || "아카이브의 문서를 읽어보세요.")}</p><span class="document-card-bottom"><span>문서 읽기</span><svg class="icon"><use href="#i-arrow"/></svg></span></a>`;
@@ -74,12 +73,17 @@
   async function renderList(state, version) {
     const query = state.query.trim();
     $("sort-select").value = state.sort;
+    // 과거 URL의 태그가 목록에서 사라져도 선택 조건을 숨기지 않습니다.
+    const filterTags = state.tag && !tags.includes(state.tag) ? [...tags, state.tag] : tags;
+    $("tag-filter").replaceChildren(new Option("전체 태그", ""), ...filterTags.map(tag => new Option(tag, tag)));
+    $("tag-filter").value = state.tag;
     $("list-reshuffle").hidden = state.sort !== "random";
     const heading = $("list-title");
     heading.replaceChildren(document.createTextNode(query ? `“${query}” 검색 결과 ` : "전체 문서 "));
     const count = document.createElement("span");
     heading.append(count);
-    let results = articles.filter(article => !query || C.matches(article, query));
+    const inTag = article => C.matchesTag(article, state.tag);
+    let results = articles.filter(article => inTag(article) && (!query || C.matches(article, query)));
     const paint = () => {
       const ids = new Set(results.map(article => article.id));
       results = state.sort === "random" ? randomOrder.filter(article => ids.has(article.id)) : state.sort === "updated" ? C.sortByUpdated(results) : C.sortByName(results);
@@ -88,12 +92,12 @@
       $("list-empty").hidden = results.length > 0;
     };
     paint();
-    $("search-status").textContent = query ? "본문까지 검색하고 있어요…" : `아카이브에 ${articles.length}개의 문서가 있습니다.`;
+    $("search-status").textContent = query ? "본문까지 검색하고 있어요…" : state.tag ? `‘${state.tag}’ 태그의 문서 ${results.length}개입니다.` : `아카이브에 ${articles.length}개의 문서가 있습니다.`;
     $("list-grid").setAttribute("aria-busy", String(Boolean(query)));
     if (query) {
       const { index, failed } = await buildIndex();
       if (version !== routeVersion) return;
-      results = articles.filter(article => C.matches(article, query, index.get(article.id) || ""));
+      results = articles.filter(article => inTag(article) && C.matches(article, query, index.get(article.id) || ""));
       paint();
       $("search-status").textContent = `${results.length}개의 문서를 찾았습니다.${failed.length ? ` ${failed.length}개 파일을 읽지 못해 해당 문서는 제목·태그·요약만 검색했습니다.` : " 제목·태그·요약·본문에서 검색했습니다."}`;
       $("list-grid").setAttribute("aria-busy", "false");
@@ -103,9 +107,10 @@
   function wikiLink(text) {
     const [reference, label] = text.split("|");
     const [target, ...sections] = reference.trim().split("#");
-    const article = target ? resolveWiki(target) : byId.get(route().id);
+    const resolved = target ? resolveWiki(target) : byId.get(route().id);
+    const article = resolved?.article;
     const caption = (label || target || sections.join("#")).trim();
-    return article ? `<a href="${esc(docHref(article, sections.join("#")))}">${esc(caption)}</a>` : `<span class="missing-link" title="등록되지 않은 문서">${esc(caption)}</span>`;
+    return article ? `<a href="${esc(docHref(article, sections.length ? sections.join("#") : resolved.section))}">${esc(caption)}</a>` : `<span class="missing-link" title="등록되지 않은 문서">${esc(caption)}</span>`;
   }
   const markdown = window.ArchiveMarkdown.createParser(marked, markedFootnote, wikiLink);
 
@@ -152,10 +157,11 @@
       }
       const url = new URL(raw, articleURL(article));
       const fragment = url.hash; url.hash = "";
-      const target = byPath.get(url.href);
+      const resolved = byPath.get(url.href);
+      const target = resolved?.article;
       if (target) {
         let section = fragment.slice(1); try { section = decodeURIComponent(section); } catch { /* 그대로 사용 */ }
-        link.href = docHref(target, section);
+        link.href = docHref(target, section || resolved.section);
       } else if (url.protocol === "https:" || url.protocol === "http:") {
         link.href = url.href;
         if (url.origin !== location.origin) { link.target = "_blank"; link.rel = "noopener noreferrer"; }
@@ -186,7 +192,9 @@
   let renderedArticle = "";
   let renderedHeadings = [];
   async function renderDocument(state, version) {
-    const article = byId.get(state.id);
+    const resolved = byId.get(state.id);
+    const article = resolved?.article;
+    const section = state.params.get("section") || resolved?.section;
     const body = $("document-body");
     $("document-view").hidden = false;
     $("browse-view").hidden = true;
@@ -201,13 +209,13 @@
       body.setAttribute("aria-busy", "false");
       return;
     }
-    if (renderedArticle === article.id) { scrollSection(renderedHeadings, state.params.get("section")); return; }
+    if (renderedArticle === article.id) { scrollSection(renderedHeadings, section); return; }
     renderedArticle = "";
     document.title = `${article.title} — 지식 아카이브`;
     $("document-title").textContent = article.title;
     $("breadcrumb-title").textContent = article.title;
     $("document-summary").textContent = article.summary || "";
-    $("document-meta").innerHTML = article.tags.map(tag => `<a class="tag-link" href="#/search?q=${encodeURIComponent(tag)}">${esc(tag)}</a>`).join("") + (article.updatedAt ? `<span>수정 <time datetime="${esc(article.updatedAt)}">${esc(article.updatedAt)}</time></span>` : "");
+    $("document-meta").innerHTML = article.tags.map(tag => `<a class="tag-link" href="#/all?tag=${encodeURIComponent(tag)}">${esc(tag)}</a>`).join("") + (article.updatedAt ? `<span>수정 <time datetime="${esc(article.updatedAt)}">${esc(article.updatedAt)}</time></span>` : "");
     $("toc-panel").hidden = true;
     body.textContent = "문서를 불러오고 있어요…"; body.setAttribute("aria-busy", "true");
     window.scrollTo(0, 0);
@@ -218,7 +226,7 @@
       renderedArticle = article.id;
       body.setAttribute("aria-busy", "false");
       $("document-title").focus({ preventScroll: true });
-      scrollSection(renderedHeadings, state.params.get("section"));
+      scrollSection(renderedHeadings, section);
       announce(`${article.title} 문서를 열었습니다.`);
     } catch {
       if (version !== routeVersion) return;
@@ -258,12 +266,14 @@
     const params = new URLSearchParams();
     if (value) params.set("q", value);
     if (state.sort !== "name") params.set("sort", state.sort);
-    const path = state.path === "/all" ? "/all" : value ? "/search" : "/";
+    if (state.tag) params.set("tag", state.tag);
+    const path = state.path === "/all" || state.tag ? "/all" : value ? "/search" : "/";
     const hash = `#${path}${params.size ? `?${params}` : ""}`;
     if (hash !== location.hash) location.hash = hash; else render();
   }
   function openRandom() {
-    const candidates = articles.filter(article => article.id !== route().id);
+    const currentId = byId.get(route().id)?.article.id;
+    const candidates = articles.filter(article => article.id !== currentId);
     const pool = candidates.length ? candidates : articles;
     if (pool.length) location.hash = docHref(pool[Math.floor(Math.random() * pool.length)]);
   }
@@ -279,9 +289,19 @@
     location.hash = `#${state.path}?${state.params}`;
   });
   $("list-reshuffle").addEventListener("click", () => { randomOrder = C.shuffle(articles); render(); });
-  // Escape는 문서에서 방금 탐색하던 목록으로 돌아갑니다.
+  $("tag-filter").addEventListener("change", () => {
+    const state = route();
+    if ($("tag-filter").value) state.params.set("tag", $("tag-filter").value);
+    else state.params.delete("tag");
+    location.hash = `#${state.path}${state.params.size ? `?${state.params}` : ""}`;
+  });
+  // 입력 중에는 단축키가 타이핑이나 브라우저 기본 동작을 가로채지 않습니다.
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && route().path.startsWith("/doc/") && !/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)) location.hash = lastBrowseRoute;
+    if (event.defaultPrevented || event.isComposing || event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+    if (event.target.isContentEditable || event.target.closest?.('input,textarea,select,[role="textbox"]')) return;
+    if (event.code === "KeyA" || event.key.toLowerCase() === "a") {
+      event.preventDefault(); openRandom();
+    } else if (event.key === "Escape" && route().path.startsWith("/doc/")) location.hash = lastBrowseRoute;
   });
   window.addEventListener("hashchange", render);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshDay(); });
