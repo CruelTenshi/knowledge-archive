@@ -38,6 +38,10 @@
     return { daily, random: shuffle(canonical.filter(article => !dailyIds.has(article.id)), random).slice(0, 4) };
   }
   function normalize(value) { return String(value).normalize("NFKC").toLocaleLowerCase("ko").replace(/\s+/g, " ").trim(); }
+  function sortByDailyRandom(articles, day) {
+    const canonical = [...articles].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+    return shuffle(canonical, seededRandom(hash(`knowledge-order:${day}`)));
+  }
   function createArticleIndex(articles, redirects = [], baseURL) {
     const byId = new Map();
     const byName = new Map();
@@ -80,7 +84,7 @@
     });
   }
   function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
-  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, createArticleIndex, matches, collectTags, matchesTag, sortByName, sortByUpdated, escapeHTML };
+  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, createArticleIndex, matches, collectTags, matchesTag, sortByName, sortByUpdated, sortByDailyRandom, escapeHTML };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.ArchiveCore = Object.freeze(api);
 })(globalThis);

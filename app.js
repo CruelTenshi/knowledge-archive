@@ -29,7 +29,7 @@
     const params = new URLSearchParams(query);
     let id = "";
     try { id = decodeURIComponent(path.slice(5)); } catch { /* 잘못된 주소는 없는 문서로 표시 */ }
-    return { path, params, id, query: params.get("q") || "", tag: params.get("tag") || "", sort: ["random", "updated"].includes(params.get("sort")) ? params.get("sort") : "name" };
+    return { path, params, id, query: params.get("q") || "", tag: params.get("tag") || "", sort: ["random", "daily", "updated"].includes(params.get("sort")) ? params.get("sort") : "name" };
   }
   function card(article, index) {
     return `<a class="document-card" href="${esc(docHref(article))}"><span class="card-fx" aria-hidden="true"></span><div class="document-card-top"><span class="document-tags">${article.tags.map(tag => `<span>${esc(tag)}</span>`).join("")}</span><span class="document-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span></div><h3>${esc(article.title)}</h3><p>${esc(article.summary || "아카이브의 문서를 읽어보세요.")}</p><span class="document-card-bottom"><span>문서 읽기</span><svg class="icon"><use href="#i-arrow"/></svg></span></a>`;
@@ -86,7 +86,9 @@
     let results = articles.filter(article => inTag(article) && (!query || C.matches(article, query)));
     const paint = () => {
       const ids = new Set(results.map(article => article.id));
-      results = state.sort === "random" ? randomOrder.filter(article => ids.has(article.id)) : state.sort === "updated" ? C.sortByUpdated(results) : C.sortByName(results);
+      if (state.sort === "daily") results = C.sortByDailyRandom(articles, currentDay).filter(article => ids.has(article.id));
+      else if (state.sort === "random") results = randomOrder.filter(article => ids.has(article.id));
+      else results = state.sort === "updated" ? C.sortByUpdated(results) : C.sortByName(results);
       fillGrid("list-grid", results);
       count.textContent = results.length;
       $("list-empty").hidden = results.length > 0;
@@ -237,7 +239,11 @@
   }
   function refreshDay() {
     const day = C.dateKey(new Date(), db.timeZone);
-    if (day !== currentDay) { currentDay = day; home = C.selectHome(articles, day); updateHome(); }
+    if (day !== currentDay) { currentDay = day; home = C.selectHome(articles, day); updateHome(); return true; }
+    return false;
+  }
+  function refreshVisibleDay() {
+    if (refreshDay() && route().sort === "daily") render();
   }
   function render() {
     clearTimeout(searchTimer);
@@ -309,8 +315,8 @@
     } else if (event.key === "Escape" && route().path.startsWith("/doc/")) location.hash = lastBrowseRoute;
   });
   window.addEventListener("hashchange", render);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshDay(); });
-  setInterval(refreshDay, 30000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshVisibleDay(); });
+  setInterval(refreshVisibleDay, 30000);
   $("total-count").textContent = articles.length;
   $("all-link-count").textContent = `${articles.length} DOCUMENTS`;
   $("random-button").disabled = !articles.length;

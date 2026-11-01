@@ -21,6 +21,17 @@ test("일일 추첨은 새로고침 난수와 등록 순서에 영향을 받지 
   assert.notDeepEqual(ids(first.random), ids(second.random));
   assert.notDeepEqual(ids(first.daily), ids(C.selectHome(fixture, "2026-11-03").daily));
 });
+test("오늘의 무작위 순은 날짜·목록으로 고정되고 등록 순서에 독립적인 전체 순열이다", () => {
+  const before = ids(fixture);
+  const order = C.sortByDailyRandom(fixture, "2026-11-02");
+  assert.deepEqual(ids(order), ids(C.sortByDailyRandom([...fixture].reverse(), "2026-11-02")));
+  assert.notDeepEqual(ids(order), ids(C.sortByDailyRandom(fixture, "2026-11-03")));
+  assert.equal(new Set(ids(order)).size, fixture.length);
+  assert.deepEqual(ids(order).sort(), [...before].sort());
+  assert.deepEqual(ids(fixture), before);
+  assert.deepEqual(C.sortByDailyRandom([], "2026-11-02"), []);
+  assert.deepEqual(C.sortByDailyRandom([fixture[0]], "2026-11-02"), [fixture[0]]);
+});
 test("빈 목록·적은 문서·많은 문서에서도 두 묶음은 중복 없이 가능한 수만큼 표시한다", () => {
   for (let count = 0; count <= 20; count++) {
     const docs = fixture.slice(0, count);
