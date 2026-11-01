@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050719">
+  <meta name="description" content="배운 것과 궁금한 것을 연결하는 나만의 위키, 지식 아카이브.">
+  <title>지식 아카이브 — 나의 지식이 연결되는 곳</title>
+  <link rel="icon" href="brand.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cyber.css">
+  <link rel="stylesheet" href="wiki.css">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <script src="vendor/marked.umd.js" defer></script>
+  <script src="vendor/purify.min.js" defer></script>
+  <script src="vendor/katex/katex.min.js" defer></script>
+  <script src="vendor/marked-footnote/index.umd.js" defer></script>
+  <script src="markdown.js" defer></script>
+  <script src="db.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="document-store.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="knowledge-site">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 5h3l12 14h3m-4-4 4 4-4 4M3 19h3l4-5m4-4 4-5h3m-4-4 4 4-4 4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-2H3zm18 0h-6a3 3 0 0 0-3 3v14a4 4 0 0 1 4-2h5z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 10a8 8 0 1 0-1 7M20 3v7h-7"/></symbol>
+  </svg>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="지식 아카이브 홈">
+        <span class="brand-mark"><img src="brand.svg" alt="" width="38" height="38"></span>
+        <span>지식 아카이브<span class="brand-dot">.</span></span>
+      </a>
+      <span class="header-caption">PERSONAL KNOWLEDGE</span>
+      <div class="header-actions">
+        <button type="button" class="button button-primary" id="random-button"><svg class="icon"><use href="#i-shuffle"/></svg><span>아무 문서 열기</span></button>
+      </div>
+    </div>
+  </header>
+  <main class="page" id="main" tabindex="-1">
+    <noscript><p class="notice">문서를 표시하려면 브라우저의 JavaScript를 켜 주세요.</p></noscript>
+    <div id="browse-view">
+      <section class="collection-intro" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="section-code">01 /</span> 나의 지식 아카이브</p>
+          <h1 id="page-title" class="archive-title" aria-label="Knowledge Archive">KNOWLEDGE<span>ARCHIVE<i>_</i></span></h1>
+          <p class="intro-description">배운 것과 궁금한 것.<br>흩어진 지식을 모으고, 새로운 생각으로 연결하는 나만의 위키.</p>
+          <div class="hero-caption" aria-hidden="true"><span class="hazard-strip"></span><span>KEEP WHAT MAKES YOU THINK.</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><img src="signal.svg" alt="" width="480" height="300"><span class="art-caption">K / ARCHIVE</span></div>
+      </section>
+      <nav class="status-bar" aria-label="문서 탐색">
+        <div class="status-tabs">
+          <a class="status-tab active" id="home-tab" href="#/" aria-current="page">발견하기</a>
+          <a class="status-tab" id="all-tab" href="#/all">전체 문서 <span id="total-count">0</span></a>
+        </div>
+        <span class="personal-label"><span class="small-dot"></span> 연결되는 나의 지식</span>
+      </nav>
+      <div class="toolbar browse-toolbar">
+        <p class="browse-caption" id="browse-caption">하나의 문서에서, 또 다른 생각으로.</p>
+        <form class="search-form" id="search-form" role="search">
+          <label class="search-field"><svg class="icon"><use href="#i-search"/></svg><input id="search-input" type="search" placeholder="제목, 태그, 본문 검색" aria-label="문서 검색" autocomplete="off"></label>
+          <button class="button button-secondary" type="submit">검색</button>
+        </form>
+      </div>
+      <div id="home-view">
+        <section class="document-section" aria-labelledby="random-title">
+          <div class="section-heading"><div><p class="eyebrow">RANDOM DISCOVERY</p><h2 id="random-title">우연한 발견 <span class="section-count" id="random-count">4</span></h2></div><button type="button" class="text-button" id="reshuffle-button"><svg class="icon"><use href="#i-refresh"/></svg>다시 뽑기</button></div>
+          <p class="section-description">새로고침할 때마다 만나는 새로운 문서.</p>
+          <div class="document-grid" id="random-grid"></div>
+        </section>
+        <section class="document-section daily-section" aria-labelledby="daily-title">
+          <div class="section-heading"><div><p class="eyebrow">DAILY SELECTION</p><h2 id="daily-title">오늘의 문서 <span class="section-count" id="daily-count">4</span></h2></div><time class="daily-date" id="daily-date"></time></div>
+          <p class="section-description">하루에 한 번, 지식을 다시 만나는 시간. <span class="daily-note">매일 00:00 · 한국 시간</span></p>
+          <div class="document-grid" id="daily-grid"></div>
+        </section>
+        <div class="home-empty empty-state" id="home-empty" hidden><svg class="icon"><use href="#i-book"/></svg><h2>첫 번째 지식을 기다리고 있어요</h2><p>문서를 등록하면 이곳에서 새로운 연결이 시작됩니다.</p></div>
+        <p class="collection-note" id="small-collection-note" hidden>등록된 문서 수에 맞춰 겹치지 않게 표시하고 있어요.</p>
+        <a class="all-documents-link" href="#/all">전체 문서 둘러보기 <span id="all-link-count"></span><svg class="icon"><use href="#i-arrow"/></svg></a>
+      </div>
+      <section id="list-view" aria-labelledby="list-title" hidden>
+        <div class="section-heading list-heading"><div class="collection-heading"><h2 id="list-title">전체 문서 <span id="result-count"></span></h2></div><div class="sort-controls"><label class="select-field"><span class="sr-only">문서 정렬 기준</span><select id="sort-select"><option value="name">ㄱㄴㄷ순</option><option value="random">무작위 순</option><option value="updated">최근 수정된 순</option></select></label><button type="button" class="text-button" id="list-reshuffle" hidden>다시 섞기 ↻</button></div></div>
+        <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+        <div class="document-grid" id="list-grid"></div>
+        <div class="empty-state" id="list-empty" hidden><h3>일치하는 문서가 없어요</h3><p>다른 단어로 검색하거나 전체 문서를 둘러보세요.</p><a class="button button-secondary" href="#/all">전체 문서 보기</a></div>
+      </section>
+    </div>
+    <section id="document-view" aria-labelledby="document-title" hidden>
+      <nav class="document-breadcrumb" aria-label="현재 위치"><a href="#/">홈</a><span>/</span><a href="#/all">전체 문서</a><span>/</span><span id="breadcrumb-title"></span></nav>
+      <div class="document-header"><p class="eyebrow">KNOWLEDGE / DOCUMENT</p><h1 id="document-title" tabindex="-1"></h1><p class="document-summary" id="document-summary"></p><div class="document-meta" id="document-meta"></div></div>
+      <div class="reading-layout">
+        <article class="markdown-body" id="document-body" aria-label="문서 본문"></article>
+        <aside class="toc-panel" id="toc-panel" hidden><h2>이 문서의 목차</h2><nav id="document-toc" aria-label="문서 목차"></nav><a class="toc-home" href="#/all">전체 문서로 돌아가기 ↗</a></aside>
+      </div>
+      <div class="document-bottom"><a class="button button-secondary" href="#/all">← 전체 문서</a><button class="button button-secondary" id="next-random-button" type="button">다른 문서 만나기 ↗</button></div>
+    </section>
+    <footer class="site-footer"><span class="footer-brand">지식 아카이브<span>.</span></span><p>나의 지식이 연결되는 곳</p><span class="footer-note">A PERSONAL WIKI / AN OPEN MIND</span></footer>
+    <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
