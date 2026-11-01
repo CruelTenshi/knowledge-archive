@@ -34,6 +34,8 @@
 .sort-controls{flex-wrap:wrap;justify-content:flex-end}
 #tag-filter{max-width:210px;width:180px}
 .document-search{justify-content:flex-end;margin-top:22px}
+/* 문서 이동 시 읽기 위치로 포커스하되 제목 전체에 선택 테두리를 표시하지 않습니다. */
+#document-title:focus{outline:none}
 .document-search .search-field{width:min(340px,100%)}
 @media(max-width:850px){.document-search .search-field{width:auto}}
 @media(max-width:650px){.list-heading{flex-wrap:wrap}.list-heading .sort-controls{width:100%;justify-content:flex-start}#tag-filter{max-width:calc(100vw - 205px);min-width:120px;width:180px}#home-view>.daily-section:first-child{margin-top:26px}#home-view>.document-section+.document-section{margin-top:30px;padding-top:25px}}
