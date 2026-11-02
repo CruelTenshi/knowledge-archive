@@ -38,6 +38,11 @@ AI의 편익과 위험을 책임·평가·감시 체계 안에서 관리하는 �
 ### 가상 예시
 채용 지원용 AI가 추천을 제공한다면 특정 집단에 대한 오류, 설명 가능성, 이의제기, 사람의 최종 판단을 검토한다. 사용을 승인한 조직의 책임이 도구 공급자에게 자동으로 모두 이전되는 것은 아니다.
 
+## 승인 기준과 운영 책임
+도입 전에 현재 업무의 오류율·처리시간·비용을 기준선으로 정하고, 허용 가능한 오류와 사람에게 넘길 조건을 구체화한다. 전체 평균 성능 외에 집단별 오류와 드문 중대 실패도 확인한다. 자동화가 빠르더라도 검토 비용이 크게 늘면 총효율은 낮아질 수 있다.
+
+모형·자료·설정의 버전, 승인자, 사고 기록, 되돌릴 절차를 남기면 변경의 책임을 추적하기 쉽다. NIST AI RMF의 네 기능은 한 번씩 수행하고 종료하는 순차 단계가 아니라 개발·운영 전반에 반복하는 활동이다.[^rmf-core]
+
 ## 관련 문서
 
 - [[artificial-intelligence|인공지능]]
@@ -49,3 +54,5 @@ AI의 편익과 위험을 책임·평가·감시 체계 안에서 관리하는 �
 - [ISO — AI 시스템 생애주기](https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso-iec%3A5338%3Aed-1%3Av1%3Aen)
 - [NIST — AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [NIST — 생성형 AI 위험 프로파일](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
+
+[^rmf-core]: [NIST — AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/). Govern은 다른 기능 전반에 걸치며 Map·Measure·Manage와 연결된다. 이 자발적 관리체계의 채택 자체가 법적 준수나 무위험을 보증하지는 않는다.
