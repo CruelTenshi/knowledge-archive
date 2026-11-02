@@ -116,6 +116,61 @@
   }
   const markdown = window.ArchiveMarkdown.createParser(marked, markedFootnote, wikiLink);
 
+  const footnotePopup = $("footnote-popup");
+  let footnoteOpener;
+  let restoreFootnoteFocus = true;
+  function closeFootnote(restore = true) {
+    if (!footnotePopup.open) return;
+    restoreFootnoteFocus = restore;
+    footnotePopup.close();
+  }
+  function showFootnote(link) {
+    const hash = new URL(link.href, location.href).hash;
+    const section = new URLSearchParams(hash.split("?")[1] || "").get("section");
+    const target = [...$("document-body").querySelectorAll(".footnotes [id]")].find(node => node.id === section);
+    if (!target) return false;
+    const copy = target.cloneNode(true);
+    for (const back of copy.querySelectorAll("[data-footnote-backref]")) back.remove();
+    for (const node of copy.querySelectorAll("[id]")) node.removeAttribute("id");
+    // 본문에서 이미 정리하고 수식까지 표시한 각주 내용을 복사합니다.
+    $("footnote-popup-content").replaceChildren(...copy.childNodes);
+    $("footnote-popup-title").textContent = `각주 ${link.textContent.replace(/[\[\]]/g, "").trim()}`;
+    $("footnote-popup-source").href = link.href;
+    if (footnoteOpener) footnoteOpener.setAttribute("aria-expanded", "false");
+    if (!footnotePopup.contains(link)) footnoteOpener = link;
+    footnoteOpener?.setAttribute("aria-expanded", "true");
+    restoreFootnoteFocus = true;
+    if (!footnotePopup.open) footnotePopup.showModal();
+    $("footnote-popup-content").scrollTop = 0;
+    return true;
+  }
+  function handleFootnoteClick(event) {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest?.("a[data-footnote-ref]");
+    if (link && showFootnote(link)) event.preventDefault();
+  }
+  $("document-body").addEventListener("click", handleFootnoteClick);
+  $("footnote-popup-content").addEventListener("click", handleFootnoteClick);
+  $("footnote-popup-close").addEventListener("click", () => closeFootnote());
+  footnotePopup.addEventListener("cancel", event => { event.preventDefault(); closeFootnote(); });
+  footnotePopup.addEventListener("close", () => {
+    const opener = footnoteOpener;
+    footnoteOpener = undefined;
+    opener?.setAttribute("aria-expanded", "false");
+    if (restoreFootnoteFocus && opener?.isConnected) opener.focus({ preventScroll: true });
+  });
+  footnotePopup.addEventListener("click", event => {
+    const box = footnotePopup.getBoundingClientRect();
+    if (event.target === footnotePopup && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) closeFootnote();
+  });
+  $("footnote-popup-source").addEventListener("click", event => {
+    event.preventDefault();
+    const href = new URL(event.currentTarget.href, location.href).hash;
+    closeFootnote(false);
+    if (location.hash === href) scrollSection(renderedHeadings, route().params.get("section"));
+    else location.hash = href;
+  });
+
   function prepareMarkdown(source, article) {
     const body = $("document-body");
     body.innerHTML = DOMPurify.sanitize(markdown.parse(source), {
@@ -179,6 +234,11 @@
     const toc = window.ArchiveMarkdown.numberHeadings(headings.map(h => ({ id: h.id, title: h.dataset.sectionTitle, level: Number(h.tagName.slice(1)) })));
     $("toc-panel").hidden = !toc.length;
     $("document-toc").innerHTML = toc.map(h => `<a class="toc-depth-${h.depth}" href="${esc(docHref(article, h.id))}"><span class="toc-number">${h.number}</span> ${esc(h.title)}</a>`).join("");
+    for (const ref of body.querySelectorAll("a[data-footnote-ref]")) {
+      ref.setAttribute("aria-haspopup", "dialog");
+      ref.setAttribute("aria-controls", "footnote-popup");
+      ref.setAttribute("aria-expanded", "false");
+    }
     for (const math of body.querySelectorAll('.math-source')) {
       katex.render(math.dataset.tex, math, { displayMode: math.dataset.display === 'true', throwOnError: false, trust: false, strict: 'warn', maxExpand: 1000 });
       math.removeAttribute('data-tex');
@@ -246,6 +306,7 @@
     if (refreshDay() && route().sort === "daily") render();
   }
   function render() {
+    closeFootnote(false);
     clearTimeout(searchTimer);
     const version = ++routeVersion;
     const state = route();
@@ -308,6 +369,10 @@
   });
   // 입력 중에는 단축키가 타이핑이나 브라우저 기본 동작을 가로채지 않습니다.
   document.addEventListener("keydown", event => {
+    if (footnotePopup.open) {
+      if (event.key === "Escape") { event.preventDefault(); closeFootnote(); }
+      return;
+    }
     if (event.defaultPrevented || event.isComposing || event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
     if (event.target.isContentEditable || event.target.closest?.('input,textarea,select,[role="textbox"]')) return;
     if (event.code === "KeyA" || event.key.toLowerCase() === "a") {

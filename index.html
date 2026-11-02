@@ -9,7 +9,7 @@
   <link rel="icon" href="brand.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="cyber.css">
-  <link rel="stylesheet" href="wiki.css?v=20261102-focus">
+  <link rel="stylesheet" href="wiki.css?v=20261102-footnotes">
   <link rel="stylesheet" href="vendor/katex/katex.min.css">
   <script src="vendor/marked.umd.js" defer></script>
   <script src="vendor/purify.min.js" defer></script>
@@ -19,7 +19,7 @@
   <script src="db.js" defer></script>
   <script src="core.js" defer></script>
   <script src="document-store.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20261102-footnotes" defer></script>
 </head>
 <body class="knowledge-site">
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -106,5 +106,10 @@
     <footer class="site-footer"><span class="footer-brand">지식 아카이브<span>.</span></span><p>나의 지식이 연결되는 곳</p><span class="footer-note">A PERSONAL WIKI / AN OPEN MIND</span></footer>
     <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
   </main>
+  <dialog id="footnote-popup" class="footnote-popup" aria-labelledby="footnote-popup-title">
+    <div class="footnote-popup-header"><h2 id="footnote-popup-title">각주</h2><button id="footnote-popup-close" type="button" aria-label="각주 팝업 닫기">닫기 <span aria-hidden="true">×</span></button></div>
+    <div id="footnote-popup-content" class="markdown-body footnote-popup-content"></div>
+    <a id="footnote-popup-source" class="footnote-popup-source" href="#">문서 아래 각주로 이동 ↗</a>
+  </dialog>
 </body>
 </html>

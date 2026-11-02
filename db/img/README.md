@@ -1,6 +1,6 @@
 # 개념 설명 이미지
 
-제작일: 2026-11-02. 내장 이미지 생성 도구를 사용했다. 아래 PNG 8개는 실제 사진·관측자료가 아닌 개념 설명용 생성 이미지다. 문서 본문의 대체 텍스트와 설명을 함께 사용한다.
+제작일: 2026-11-02. 내장 이미지 생성 도구를 사용했다. 아래 생성 그림 10개는 실제 사진·관측자료가 아닌 개념 설명용 이미지다. 계산 그래프 12개의 가정과 재생성 방법은 `graphs.md`에 별도로 기록했다. 문서 본문의 대체 텍스트와 설명을 함께 사용한다.
 
 ## 가상 품절
 
@@ -77,3 +77,26 @@ Use case: scientific-educational. One landscape 1536x1024 educational illustrati
 ### 생성 프롬프트
 
 Use case: scientific-educational. Create one landscape 1536x1024 educational illustrated comparison of FOUR goods, a clean 2 by 2 matrix with four independent hypothetical scenes. Top-left '사적재': one customer buys and eats a single sandwich; top-right '클럽재': a lightly used membership swimming pool with access gate/card reader; bottom-left '공유자원': two separate fishing boats on an open pond competing over a visibly finite fish population; bottom-right '공공재': a local outdoor warning siren broadcasting simultaneously to several neighborhood homes without ticket gate. Exact large Korean headings only '사적재', '클럽재', '공유자원', '공공재'. Under each add respective exact two-part label '배제 가능 · 경합', '배제 가능 · 혼잡 전 비경합', '배제 어려움 · 경합', '배제 어려움 · 비경합'. Do NOT add confusing column or row axis headers. Each scene clearly separates access control and rival consumption; membership pool explicitly not crowded. Dark navy #081027, light neutral miniatures, teal and muted violet accents, clean editorial isometric illustration, ample margins and perfectly readable large Korean sans-serif. No numbers, logos, watermark or additional text.
+
+
+## 홀드업 문제
+
+- 파일: `asset-specificity.png`
+- 본문: `../홀드업 문제.md`
+
+### 생성 프롬프트
+
+Use case: scientific-educational. One landscape 1536x1024 premium realistic isometric educational illustration for a Korean knowledge archive about asset specificity and hold-up. LEFT: a supplier's clean factory with a custom machine making a distinctive hexagonal component. CENTER: its intended customer's assembly station with an exactly matching hexagonal socket, clear teal arrow delivering the matching part. RIGHT: an alternative buyer's assembly machine has an obviously different round socket, the same hexagonal part cannot fit, amber small crossed-out fit indicator. Show the machinery visibly specialized, not broken. Three exact Korean labels only: '전용 설비', '특정 고객과 거래', '다른 용도로 전환 어려움'. Do not show prices or quantified losses, no bribery or violence, no document text, no other labels. Clean spatial storytelling, dark navy #081027 background, teal intended-match flow, restrained violet architecture and amber mismatch, simple correct geometrical shapes, generous spacing, crisp readable sans serif. Hypothetical illustration, not a photograph of a real firm. No logo, watermark, equations or chart.
+
+### 최종 수정 프롬프트
+
+Edit only the CENTRAL customer's tooling to correct the conceptual fit: replace every circular receiving socket on the CENTRAL assembly conveyor with a crisp HEXAGONAL recessed receiving socket matching exactly the hexagonal metal prism being delivered. Show the first hexagonal prism partly seated inside the matching central hexagonal socket. Keep the RIGHT alternative buyer's receiving socket CIRCULAR and mismatched, with the orange X. Keep left supplier, entire composition, dark navy palette, the three Korean labels, arrow direction, and all other details unchanged. The center must clearly FIT and the right must clearly NOT FIT. No extra labels.
+
+## 지정학
+
+- 파일: `chokepoint-route.png`
+- 본문: `../지정학.md`
+
+### 생성 프롬프트
+
+Use case: scientific-educational. Create one landscape 1536x1024 clean editorial 3D top-down oblique island-and-sea miniature illustrating a maritime chokepoint and the cost of a detour. A fictitious irregular island sits centrally. Two distant ports A left and B right connected by TWO clearly different sea routes: a short cyan route passes through a narrow channel cutting through a gap in the central island; an amber long detour route curves around the island's entire southern coast, staying in water at all points. A few small cargo ships make scale clear, port cranes at both ends. A small violet bracket marks the narrow channel. Only three exact Korean labels: '좁은 통로', '짧은 항로', '우회 항로'. Use NO country names, NO real coastlines, NO borders, NO flags, NO distances or travel-time numbers. Both routes must connect the SAME two ports, never cross land, do not imply the short route is already closed. Rich but restrained precise illustrated relief map, dark navy sea #081027, light neutral land, teal and amber routes, crisp labels with generous whitespace, no watermark or logo. Hypothetical concept scene, not real geospatial data.

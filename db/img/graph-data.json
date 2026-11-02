@@ -1,0 +1,66 @@
+{
+  "type": "illustrative-assumptions-not-observations",
+  "graphs": [
+    {
+      "file": "dollar-smile-graph.png",
+      "assumptions": "정성적 세 국면. 가로축은 시간·실측 성장률이 아니며 세로축에도 수치 단위를 부여하지 않음."
+    },
+    {
+      "file": "average-cost-graph.png",
+      "assumptions": "TC=1000+10Q. Q=50..500. 동일 설비·일정 단위변동비의 범위, 장기 비용곡선 아님."
+    },
+    {
+      "file": "compound-interest-graph.png",
+      "assumptions": "PV=100,r=.05,n=0..20. 비교용 단리는 매년 최초 원금의 5%만 반영."
+    },
+    {
+      "file": "portfolio-correlation-graph.png",
+      "assumptions": "Var=.04[w²+(1-w)²+2ρw(1-w)]. ρ=1,0,-1. 완전 음의 상관과 동일 변동성은 설명용 극단 가정."
+    },
+    {
+      "file": "utility-frontier-graph.png",
+      "assumptions": "uA+uB<=5. A에서 B로는 파레토 개선, B와 C는 서로 지배하지 않음. 효용의 객관적 측정치 아님."
+    },
+    {
+      "file": "economic-surplus-graph.png",
+      "assumptions": "D=14-.6Q,S=2+.4Q. Q*=12,P*=6.8,CS=.5*12*7.2=43.2,PS=.5*12*4.8=28.8."
+    },
+    {
+      "file": "external-cost-graph.png",
+      "assumptions": "MSC=MPC+2. MB=MPC=>Q12, MB=MSC=>Q10. 순손실=.5*(12-10)*2=2. 소비 외부효과 없음."
+    },
+    {
+      "file": "difference-in-differences-graph.png",
+      "assumptions": "관측값 T100->130,C100->110. (130-100)-(110-100)=20. 평행추세 등 가정이 없으면 인과효과로 해석 불가."
+    },
+    {
+      "file": "risk-pooling-graph.png",
+      "assumptions": "Var(mean)/σ²=[1+(n-1)ρ]/n,n1..100,ρ0,.2. 평균 손실의 불확실성, 총손실 감소 그래프 아님."
+    },
+    {
+      "file": "qaly-area-graph.png",
+      "assumptions": "q=.8,Δt=2,QALY=1.6. 할인·생존확률을 생략. 사람의 존엄에 대한 점수가 아님."
+    },
+    {
+      "file": "little-law-area-graph.png",
+      "assumptions": "도착0,1,2분/출발3,4,5분. 체류3분씩,총9건분,T5,n3,L1.8,λ.6,W3. 끝점의 순간은 면적에 영향 없음."
+    },
+    {
+      "file": "consumption-smoothing-graph.png",
+      "assumptions": "r0,A0=0,Y=[1,4,1],C=[2,2,2]. 소비후잔액[-1,1,0]. 일정 소비가 항상 최적이라는 주장은 아님."
+    }
+  ],
+  "checks": {
+    "average_cost_q100": 20.0,
+    "average_cost_q200": 15.0,
+    "compound_year20": 265.3297705144422,
+    "portfolio_half_rho0": 0.1414213562373095,
+    "surplus_cs": 43.2,
+    "surplus_ps": 28.799999999999997,
+    "did": 20,
+    "qaly": 1.6,
+    "little_area": 9,
+    "consumption_total_income": 6,
+    "consumption_total_spending": 6
+  }
+}
