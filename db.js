@@ -11,6 +11,213 @@
   "use strict";
   const ARTICLES = [
     {
+      "id": "critical-thinking",
+      "title": "비판적 사고",
+      "file": "비판적 사고.md",
+      "summary": "주장의 근거·추론·맥락을 평가하고 자신의 판단을 수정하는 사고.",
+      "tags": [
+        "논리학",
+        "분석"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "argument",
+      "title": "논증",
+      "file": "논증.md",
+      "summary": "전제와 결론의 구조, 숨은 가정과 지지 관계를 분석하는 방법.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "deductive-reasoning",
+      "title": "연역논증",
+      "file": "연역논증.md",
+      "summary": "전제의 참이 결론의 참을 보장하는 타당성과 건전성.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "inductive-reasoning",
+      "title": "귀납논증",
+      "file": "귀납논증.md",
+      "summary": "전제가 결론의 개연성을 높이는 추론과 일반화·유비의 조건.",
+      "tags": [
+        "논리학",
+        "분석"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "abduction",
+      "title": "귀추법",
+      "file": "귀추법.md",
+      "summary": "관찰을 설명하는 경쟁 가설들을 비교하는 가설적 추론.",
+      "tags": [
+        "논리학",
+        "분석"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "necessary-sufficient",
+      "title": "필요조건과 충분조건",
+      "file": "필요조건과 충분조건.md",
+      "summary": "조건문의 방향과 오직·만약 표현, 필요충분조건의 구별.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "propositional-logic",
+      "title": "명제논리",
+      "file": "명제논리.md",
+      "summary": "연결사의 진리조건과 조건문 추론, 일관성의 판단.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "categorical-proposition",
+      "title": "정언명제",
+      "file": "정언명제.md",
+      "summary": "A·E·I·O 명제의 수량·성질과 존재 가정, 대당관계.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "categorical-syllogism",
+      "title": "정언삼단논법",
+      "file": "정언삼단논법.md",
+      "summary": "세 개념을 연결하는 정언논증의 식·격과 타당성 검토.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "intension-extension",
+      "title": "내포와 외연",
+      "file": "내포와 외연.md",
+      "summary": "개념의 적용 조건과 그 조건을 만족하는 대상 집합의 관계.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "ambiguity-vagueness",
+      "title": "애매성과 모호성",
+      "file": "애매성과 모호성.md",
+      "summary": "여러 의미로 해석되는 표현과 적용 경계가 흐린 표현의 차이.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "informal-fallacies",
+      "title": "비형식적 오류",
+      "file": "비형식적 오류.md",
+      "summary": "관련성·증거·가정·언어를 점검해 그럴듯한 추론의 비약을 찾는 방법.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "principle-of-charity",
+      "title": "자비의 원칙",
+      "file": "자비의 원칙.md",
+      "summary": "상대의 주장을 문맥에 맞는 합리적인 형태로 해석하는 논증 원칙.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "pragmatics",
+      "title": "화용론",
+      "file": "화용론.md",
+      "summary": "문장의 문자적 의미와 맥락 속 의도·함축을 구분하는 관점.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "socrates",
+      "title": "소크라테스",
+      "file": "소크라테스.md",
+      "summary": "정의와 믿음의 근거를 질문하고 반례로 검토하는 문답법.",
+      "tags": [
+        "인물",
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "is-ought",
+      "title": "사실과 당위",
+      "file": "사실과 당위.md",
+      "summary": "어떤 일이 그러하다는 설명과 그래야 한다는 판단 사이의 정당화.",
+      "tags": [
+        "논리학",
+        "윤리"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "scientific-hypothesis",
+      "title": "과학적 가설",
+      "file": "과학적 가설.md",
+      "summary": "설명을 제안하고 예측·반례·보조가정으로 검토하는 방법.",
+      "tags": [
+        "분석",
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "free-will-determinism",
+      "title": "자유의지와 결정론",
+      "file": "자유의지와 결정론.md",
+      "summary": "인과적 결정과 선택·행위의 통제, 책임의 양립 가능성.",
+      "tags": [
+        "윤리"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "behaviorism",
+      "title": "행동주의",
+      "file": "행동주의.md",
+      "summary": "관찰 가능한 행동과 심리 상태의 관계, 의식에 관한 사고실험.",
+      "tags": [
+        "사회심리"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
+      "id": "distributive-justice",
+      "title": "분배적 정의",
+      "file": "분배적 정의.md",
+      "summary": "자원·기회·부담을 나누는 기준과 제도의 정당성.",
+      "tags": [
+        "윤리",
+        "정치철학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "international-politics",
       "title": "국제정치학",
       "file": "국제정치학.md",
@@ -140,7 +347,7 @@
       "tags": [
         "사회심리"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "hans-morgenthau",
@@ -240,7 +447,7 @@
         "인물",
         "정치철학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "rawls-justice",
@@ -415,7 +622,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "incomplete-contracts",
@@ -868,7 +1075,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "experiments",
