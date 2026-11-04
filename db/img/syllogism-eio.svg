@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 490" role="img" aria-labelledby="title desc">
+<title id="title">EIO-1의 벤 다이어그램</title><desc id="desc">M과 P의 교집합에 빗금이 있다. X는 S와 M에 속하고 P에는 속하지 않는다.</desc>
+<rect width="640" height="490" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, sans-serif" fill="#eef5ff" text-anchor="middle">
+<defs><clipPath id="m"><circle cx="320" cy="304" r="120"/></clipPath><pattern id="shade" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(36)"><path d="M0 0V8" stroke="#d7bafa" stroke-width="4"/></pattern></defs>
+<text x="320" y="49" font-size="29" font-weight="700">EIO-1 벤 다이어그램</text>
+<g fill="#172348" fill-opacity=".55"><circle cx="245" cy="206" r="120"/><circle cx="395" cy="206" r="120"/><circle cx="320" cy="304" r="120"/></g>
+<circle cx="395" cy="206" r="120" fill="url(#shade)" clip-path="url(#m)"/>
+<g fill="none" stroke-width="3"><circle cx="245" cy="206" r="120" stroke="#56e2d4"/><circle cx="395" cy="206" r="120" stroke="#c4a8fb"/><circle cx="320" cy="304" r="120" stroke="#8abaff"/></g>
+<g font-size="21"><text x="170" y="141">S · 지원자</text><text x="473" y="141">P · 무자격자</text><text x="320" y="391">M · 검사원</text></g>
+<text x="248" y="287" fill="#56e2d4" font-size="33" font-weight="700">X</text>
+<text x="320" y="461" font-size="19">빗금: 원소 없음 · X: 원소가 적어도 하나 있음</text></g>
+</svg>

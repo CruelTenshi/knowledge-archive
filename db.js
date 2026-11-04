@@ -11,6 +11,16 @@
   "use strict";
   const ARTICLES = [
     {
+      "id": "predicate-logic",
+      "title": "술어논리",
+      "file": "술어논리.md",
+      "summary": "대상의 성질과 관계, 전칭·존재 양화사와 부정의 범위를 분석하는 논리.",
+      "tags": [
+        "논리학"
+      ],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "critical-thinking",
       "title": "비판적 사고",
       "file": "비판적 사고.md",
@@ -225,7 +235,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "political-realism",
@@ -235,7 +245,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "liberalism",
@@ -246,7 +256,7 @@
         "정치철학",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "power",
@@ -256,7 +266,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "interdependence",
@@ -267,7 +277,7 @@
         "국제정치",
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "international-system",
@@ -277,7 +287,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "balance-of-power",
@@ -287,7 +297,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "diplomacy",
@@ -297,7 +307,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "international-institutions",
@@ -307,7 +317,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "functionalism",
@@ -317,7 +327,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "geopolitics",
@@ -327,7 +337,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "security",
@@ -337,7 +347,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "prejudice",
@@ -358,7 +368,7 @@
         "인물",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "kenneth-waltz",
@@ -369,7 +379,7 @@
         "인물",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "thomas-hobbes",
@@ -402,7 +412,7 @@
         "인물",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "game-theory",
@@ -413,7 +423,7 @@
         "경제학",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "business-ethics",
@@ -425,7 +435,7 @@
         "기업과 사회",
         "경영"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "utilitarianism",
@@ -498,7 +508,7 @@
       "tags": [
         "기업과 사회"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "shared-value",
@@ -508,7 +518,7 @@
       "tags": [
         "기업과 사회"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "net-zero",
@@ -539,7 +549,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "externalities",
@@ -549,7 +559,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "public-goods",
@@ -560,7 +570,7 @@
         "경제학",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "information-asymmetry",
@@ -590,7 +600,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "transaction-costs",
@@ -602,7 +612,7 @@
         "국제정치",
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "hold-up",
@@ -663,7 +673,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "management",
@@ -673,7 +683,7 @@
       "tags": [
         "경영"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "leadership",
@@ -683,7 +693,7 @@
       "tags": [
         "경영"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "planned-behavior",
@@ -693,7 +703,7 @@
       "tags": [
         "조직행동"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "strategy",
@@ -703,7 +713,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "vrio",
@@ -723,7 +733,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "vertical-integration",
@@ -743,7 +753,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "blue-ocean",
@@ -753,7 +763,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "value-chain",
@@ -783,7 +793,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "consumption-smoothing",
@@ -843,7 +853,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "venture-capital-ipo",
@@ -893,7 +903,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "stewardship",
@@ -903,7 +913,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "cost-of-capital",
@@ -913,7 +923,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "bank-runs",
@@ -1125,7 +1135,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "stp",
@@ -1175,7 +1185,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "dikw",
@@ -1215,7 +1225,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "artificial-intelligence",
@@ -1225,7 +1235,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "ai-management",
@@ -1235,7 +1245,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-04"
     },
     {
       "id": "comparative-advantage",

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 490" role="img" aria-labelledby="title desc">
+<title id="title">인간안보 피해가 확대되는 경로</title>
+<desc id="desc">환경 충격이 생계에 영향을 주고 이동과 자원 경쟁을 낳을 수 있다. 지원과 조정이 피해 확대를 줄이고 정치적 배제와 취약한 제도가 피해를 확대할 수 있다.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8abaff"/></marker></defs>
+<rect width="720" height="490" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, sans-serif" fill="#eef5ff" text-anchor="middle">
+<text x="360" y="52" font-size="29" font-weight="700">인간안보 피해가 확대되는 경로</text>
+<g fill="#172348" stroke-width="2">
+<rect x="30" y="98" width="188" height="70" rx="13" stroke="#8abaff"/>
+<rect x="266" y="98" width="188" height="70" rx="13" stroke="#8abaff"/>
+<rect x="502" y="98" width="188" height="70" rx="13" stroke="#8abaff"/>
+<rect x="54" y="258" width="286" height="92" rx="13" stroke="#56e2d4"/>
+<rect x="380" y="258" width="286" height="92" rx="13" stroke="#c4a8fb"/>
+</g>
+<g fill="none" stroke="#8abaff" stroke-width="3" marker-end="url(#a)">
+<path d="M222 133h39"/><path d="M458 133h39"/><path d="M596 174v39H197v38"/><path d="M596 213h-73v38"/>
+</g>
+<g font-size="22" font-weight="700"><text x="124" y="142">환경 충격</text><text x="360" y="142">생계 악화</text><text x="596" y="142">이동과 자원 경쟁</text>
+<text x="197" y="295" fill="#56e2d4">지원과 갈등 조정</text><text x="523" y="295" fill="#dccbff">정치적 배제와 취약한 제도</text></g>
+<g font-size="19"><text x="197" y="327">피해 확대 가능성이 낮아짐</text><text x="523" y="327">피해가 더 커질 수 있음</text>
+<text x="360" y="409">피해의 규모와 분포는 제도와 대응에 따라 달라진다.</text><text x="360" y="440" fill="#c8d5e9">화살표는 가능한 경로를 나타낸다.</text></g>
+</g></svg>

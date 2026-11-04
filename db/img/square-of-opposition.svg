@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 490" role="img" aria-labelledby="title desc">
+<title id="title">정언명제의 대당사각형</title><desc id="desc">실선 대각선은 항상 성립하는 모순관계, 점선은 주어가 존재할 때 성립하는 관계이다.</desc>
+<rect width="640" height="490" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, sans-serif" fill="#eef5ff" text-anchor="middle">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c4a8fb"/></marker></defs>
+<text x="320" y="51" font-size="29" font-weight="700">정언명제의 대당사각형</text>
+<path d="M163 130 H477 M163 365 H477 M126 167 V321 M514 167 V321" fill="none" stroke="#c4a8fb" stroke-width="3" stroke-dasharray="8 6"/>
+<path d="M126 310 V325 M514 310 V325" fill="none" stroke="#c4a8fb" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M153 155 L488 339 M488 155 L153 339" fill="none" stroke="#56e2d4" stroke-width="3"/>
+<rect x="275" y="226" width="90" height="42" rx="12" fill="#122b44" stroke="#56e2d4"/>
+<text x="320" y="254" font-size="21">모순</text>
+<g fill="#172348" stroke="#c4a8fb" stroke-width="2"><circle cx="126" cy="130" r="37"/><circle cx="514" cy="130" r="37"/><circle cx="126" cy="365" r="37"/><circle cx="514" cy="365" r="37"/></g>
+<g font-size="27" font-weight="700"><text x="126" y="139">A</text><text x="514" y="139">E</text><text x="126" y="374">I</text><text x="514" y="374">O</text></g>
+<g fill="#dccbff" font-size="20"><text x="320" y="117">반대</text><text x="320" y="395">소반대</text><text x="91" y="254">함축</text><text x="549" y="254">함축</text></g>
+<text x="320" y="450" font-size="19" fill="#d0dcec">청록 실선: 항상 성립 · 보라 점선: S가 존재할 때 성립</text></g>
+</svg>
