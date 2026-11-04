@@ -19,7 +19,7 @@
       return;
     }
   }
-  function createParser(marked, footnote, resolveWiki) {
+  function createParser(marked, footnote, resolveWiki, renderTemplate) {
     const parser = new marked.Marked({ gfm: true });
     const renderMath = token => `<${token.display ? "div" : "span"} class="math-source" data-tex="${escape(token.text)}" data-display="${token.display}"></${token.display ? "div" : "span"}>`;
     parser.use(footnote({ description: "각주", headingClass: "footnotes-heading", refMarkers: true, backRefLabel: "본문의 각주 {0} 위치로 돌아가기" }));
@@ -30,6 +30,15 @@
         tokenizer(src) { const match = /^\[\[([^\]\n]+)\]\]/.exec(src); if (match) return { type: "wikilink", raw: match[0], text: match[1] }; },
         renderer(token) { return resolveWiki(token.text); } }
     ] });
+    if (renderTemplate) parser.use({ extensions: [{
+      name: "wikiTemplate", level: "block",
+      start(src) { return src.search(/^\{\{틀:/m); },
+      tokenizer(src) {
+        const match = /^\{\{틀:([a-z0-9-]+)\}\}[ \t]*(?:\n|$)/.exec(src);
+        if (match) return { type: "wikiTemplate", raw: match[0], key: match[1] };
+      },
+      renderer(token) { return renderTemplate(token.key); }
+    }] });
     return parser;
   }
   function numberHeadings(headings) {

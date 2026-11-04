@@ -109,12 +109,99 @@
   function wikiLink(text) {
     const [reference, label] = text.split("|");
     const [target, ...sections] = reference.trim().split("#");
-    const resolved = target ? resolveWiki(target) : byId.get(route().id);
-    const article = resolved?.article;
     const caption = (label || target || sections.join("#")).trim();
+    if (!target && sections.length) return '<a href="#' + esc(encodeURIComponent(sections.join("#"))) + '">' + esc(caption) + '</a>';
+    const resolved = resolveWiki(target);
+    const article = resolved?.article;
     return article ? `<a href="${esc(docHref(article, sections.length ? sections.join("#") : resolved.section))}">${esc(caption)}</a>` : `<span class="missing-link" title="등록되지 않은 문서">${esc(caption)}</span>`;
   }
-  const markdown = window.ArchiveMarkdown.createParser(marked, markedFootnote, wikiLink);
+  function renderWikiTemplate(key) {
+    const template = window.ARCHIVE_TEMPLATES[key];
+    if (!Object.hasOwn(window.ARCHIVE_TEMPLATES, key)) return '<p class="missing-link">등록되지 않은 틀: ' + esc(key) + '</p>';
+    const groups = template.groups.map(group => {
+      const links = group.articles.map(id => {
+        const article = byId.get(id)?.article;
+        return article ? '<li><a href="' + esc(docHref(article)) + '">' + esc(article.title) + '</a></li>' : "";
+      }).join("");
+      return '<div class="wiki-template-group"><strong>' + esc(group.label) + '</strong><ul>' + links + '</ul></div>';
+    }).join("");
+    return '<nav class="wiki-template" aria-label="' + esc(template.title) + '"><strong class="wiki-template-title">' + esc(template.title) + '</strong>' + groups + '</nav>';
+  }
+  const markdown = window.ArchiveMarkdown.createParser(marked, markedFootnote, wikiLink, renderWikiTemplate);
+  function markdownFragment(source) {
+    return DOMPurify.sanitize(markdown.parse(source), {
+      RETURN_DOM_FRAGMENT: true, USE_PROFILES: { html: true },
+      FORBID_TAGS: ["style", "form", "iframe", "object", "embed"], FORBID_ATTR: ["style"]
+    });
+  }
+  function resolvePathLink(url) {
+    const path = new URL(url);
+    path.hash = "";
+    return byPath.get(path.href);
+  }
+
+  const backlinkPanel = $("document-backlinks");
+  const outgoingLinks = new Map();
+  let backlinkRequest = 0;
+
+  function documentTargets(source, article) {
+    const targets = new Set();
+    for (const link of markdownFragment(source).querySelectorAll("a[href]")) {
+      if (link.closest(".wiki-template")) continue;
+      const href = link.getAttribute("href");
+      try {
+        const url = new URL(href, href.startsWith("#/") ? location.href : articleURL(article));
+        const routeMatch = /^#\/doc\/([^?]+)(?:\?|$)/.exec(url.hash);
+        const samePage = url.origin === location.origin &&
+          url.pathname.replace(/\/index\.html$/, "/") === location.pathname.replace(/\/index\.html$/, "/");
+        const target = routeMatch && samePage
+          ? byId.get(decodeURIComponent(routeMatch[1]))
+          : href.startsWith("#") ? undefined : resolvePathLink(url);
+        if (target && target.article.id !== article.id) targets.add(target.article.id);
+      } catch { /* 잘못된 주소는 역링크에서 제외합니다. */ }
+    }
+    return targets;
+  }
+  function resetBacklinks() {
+    backlinkRequest++;
+    backlinkPanel.open = false;
+    backlinkPanel.hidden = true;
+    $("backlink-count").textContent = "";
+    $("backlink-status").textContent = "";
+    $("backlink-list").replaceChildren();
+    $("backlink-retry").hidden = true;
+  }
+  async function showBacklinks() {
+    if (!backlinkPanel.open || !renderedArticle) return;
+    const articleId = renderedArticle;
+    const request = ++backlinkRequest;
+    $("backlink-status").textContent = "이 문서를 참조한 문서를 확인하고 있어요…";
+    $("backlink-retry").hidden = true;
+    const { index, failed } = await buildIndex();
+    if (request !== backlinkRequest) return;
+    let unread = failed.length;
+    for (const article of articles) {
+      if (!index.has(article.id) || outgoingLinks.has(article.id)) continue;
+      try { outgoingLinks.set(article.id, documentTargets(index.get(article.id), article)); }
+      catch { unread++; }
+    }
+    const matches = C.sortByName(articles.filter(article => outgoingLinks.get(article.id)?.has(articleId)));
+    $("backlink-count").textContent = '(' + matches.length + ')';
+    $("backlink-list").replaceChildren(...matches.map(article => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = docHref(article);
+      link.textContent = article.title;
+      item.append(link);
+      return item;
+    }));
+    $("backlink-status").textContent = unread
+      ? '문서 ' + unread + '개를 확인하지 못했습니다.'
+      : matches.length ? "" : "이 문서를 참조하는 다른 문서가 없습니다.";
+    $("backlink-retry").hidden = !unread;
+  }
+  backlinkPanel.addEventListener("toggle", showBacklinks);
+  $("backlink-retry").addEventListener("click", showBacklinks);
 
   const footnotePopup = $("footnote-popup");
   let footnoteOpener;
@@ -173,9 +260,10 @@
 
   function prepareMarkdown(source, article) {
     const body = $("document-body");
-    body.innerHTML = DOMPurify.sanitize(markdown.parse(source), {
-      USE_PROFILES: { html: true }, FORBID_TAGS: ["style", "form", "iframe", "object", "embed"], FORBID_ATTR: ["style"]
-    });
+    body.replaceChildren(markdownFragment(source));
+    for (const link of body.querySelectorAll(".wiki-template a")) {
+      if (link.getAttribute("href") === docHref(article)) link.setAttribute("aria-current", "page");
+    }
     const first = body.firstElementChild;
     if (first?.tagName === "H1" && C.normalize(first.textContent) === C.normalize(article.title)) first.remove();
     const lead = body.firstElementChild;
@@ -212,9 +300,11 @@
         link.href = docHref(article, target?.id || findSection(section)?.id || section);
         continue;
       }
-      const url = new URL(raw, articleURL(article));
-      const fragment = url.hash; url.hash = "";
-      const resolved = byPath.get(url.href);
+      let url;
+      try { url = new URL(raw, articleURL(article)); }
+      catch { link.removeAttribute("href"); continue; }
+      const fragment = url.hash;
+      const resolved = resolvePathLink(url);
       const target = resolved?.article;
       if (target) {
         let section = fragment.slice(1); try { section = decodeURIComponent(section); } catch { /* 그대로 사용 */ }
@@ -260,6 +350,7 @@
     const body = $("document-body");
     $("document-view").hidden = false;
     $("browse-view").hidden = true;
+    if (renderedArticle !== article?.id) resetBacklinks();
     if (!article) {
       renderedArticle = "";
       document.title = "문서를 찾을 수 없어요 — 지식 아카이브";
@@ -286,6 +377,7 @@
       if (version !== routeVersion) return;
       renderedHeadings = prepareMarkdown(source, article);
       renderedArticle = article.id;
+      backlinkPanel.hidden = false;
       body.setAttribute("aria-busy", "false");
       $("document-title").focus({ preventScroll: true });
       scrollSection(renderedHeadings, section);
@@ -314,6 +406,7 @@
     if (state.path.startsWith("/doc/")) { renderDocument(state, version); return; }
     lastBrowseRoute = location.hash || "#/";
     renderedArticle = "";
+    resetBacklinks();
     $("document-view").hidden = true; $("browse-view").hidden = false;
     const isList = state.path === "/all" || state.path === "/search";
     $("home-view").hidden = isList; $("list-view").hidden = !isList;

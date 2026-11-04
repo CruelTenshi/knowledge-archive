@@ -9,17 +9,18 @@
   <link rel="icon" href="brand.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="cyber.css">
-  <link rel="stylesheet" href="wiki.css?v=20261102-footnotes">
+  <link rel="stylesheet" href="wiki.css?v=20261104-wiki">
   <link rel="stylesheet" href="vendor/katex/katex.min.css">
   <script src="vendor/marked.umd.js" defer></script>
   <script src="vendor/purify.min.js" defer></script>
   <script src="vendor/katex/katex.min.js" defer></script>
   <script src="vendor/marked-footnote/index.umd.js" defer></script>
-  <script src="markdown.js" defer></script>
+  <script src="markdown.js?v=20261104-wiki" defer></script>
   <script src="db.js" defer></script>
   <script src="core.js" defer></script>
   <script src="document-store.js" defer></script>
-  <script src="app.js?v=20261102-footnotes" defer></script>
+  <script src="wiki-templates.js" defer></script>
+  <script src="app.js?v=20261104-wiki" defer></script>
 <link rel="stylesheet" href="hologram.css?v=20261103">
 <script src="hologram.js?v=20261103" defer></script>
 </head>
@@ -100,7 +101,17 @@
       </form>
       <div class="document-header"><p class="eyebrow">KNOWLEDGE / DOCUMENT</p><h1 id="document-title" tabindex="-1"></h1><p class="document-summary" id="document-summary"></p><div class="document-meta" id="document-meta"></div></div>
       <div class="reading-layout">
-        <article class="markdown-body" id="document-body" aria-label="문서 본문"></article>
+        <div class="document-column">
+          <article class="markdown-body" id="document-body" aria-label="문서 본문"></article>
+          <details id="document-backlinks" class="wiki-panel" hidden>
+            <summary>역링크 <span id="backlink-count"></span></summary>
+            <div class="wiki-panel-content">
+              <p id="backlink-status" role="status"></p>
+              <ul id="backlink-list"></ul>
+              <button class="button button-secondary" id="backlink-retry" type="button" hidden>다시 확인</button>
+            </div>
+          </details>
+        </div>
         <aside class="toc-panel" id="toc-panel" hidden><h2>이 문서의 목차</h2><nav id="document-toc" aria-label="문서 목차"></nav><a class="toc-home" href="#/all">전체 문서로 돌아가기 ↗</a></aside>
       </div>
       <div class="document-bottom"><a class="button button-secondary" href="#/all">← 전체 문서</a><button class="button button-secondary" id="next-random-button" type="button">다른 문서 만나기 ↗</button></div>
