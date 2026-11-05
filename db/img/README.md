@@ -135,7 +135,25 @@ Use case: scientific-educational. Create ONE landscape 1536x1024 Korean educatio
 
 Use case: scientific-educational. ONE landscape 1536x1024 educational illustration for a Korean knowledge wiki. Style reference only: same dark navy #081027 background, teal and muted violet luminous edges, clean premium 2.5D miniature objects and large crisp Korean sans-serif typography as attached reference. Subject: nested extensions and increasing intension. Show THREE clearly nested rectangular translucent platforms/regions in a top-down slightly isometric view, no overlap ambiguity: large outer region labeled '탈것', medium region COMPLETELY INSIDE outer labeled '자동차', small region COMPLETELY INSIDE medium labeled '전기자동차'. A bicycle stands in the outer region but OUTSIDE medium; a generic conventional passenger car with a small fuel-pump pictogram beside it stands INSIDE medium but OUTSIDE small; an electric car with a little lightning symbol stands INSIDE small. Exactly ONE example object per region's exclusive area. Keep objects and labels separated. Bottom below regions, two clearly separate short horizontal arrows with exact Korean labels: rightward arrow '조건 추가' and leftward arrow '대상 범위'. They explain that moving from 탈것 to 자동차 to 전기자동차 adds conditions and narrows the applicable set, with the main nested objects providing the key explanation. No numeric claims, no data chart, no brands, no other text. Accurate set containment, no partially intersecting circles.
 
+## 현금전환주기
+
+2026-11-05. 「인간안보」 도식의 짙은 남색 바탕과 청록·보라색 표기를 참고해 [현금전환주기 SVG](cash-conversion-cycle.svg)를 그렸다. 「운전자본」에서 설명하는 가상 거래다. 0일 매입, 30일 지급, 40일 판매, 65일 회수로 놓아 지급부터 회수까지 35일을 표시했다.
+
 ## 개념 설명 그래프
+
+### 시장구조와 회계 계산 도식
+
+2026-11-05. 짙은 남색 바탕과 청록·보라색 강조는 기존 「인간안보」와 「현금전환주기」 도식을 참고했다. 아래 수치와 거래는 개념을 설명하기 위한 가정이다.
+
+| 파일 | 문서와 재현에 필요한 가정 |
+| --- | --- |
+| [production-cost-curves.svg](production-cost-curves.svg) | 「생산비용」. 고정비 36, 가변비 20Q−3Q²+0.25Q³. AVC 최저 수량 6, ATC 최저 수량 약 7.34. |
+| [monopoly-welfare.svg](monopoly-welfare.svg) | 「독점」. 수요 P=100−Q, MC=20. 독점 수량 40, 경쟁 기준 수량 80, 사중손실 800. |
+| [monopolistic-competition.svg](monopolistic-competition.svg) | 「독점적 경쟁」. 수요 P=20−3Q, 총비용 16+4Q+Q². 장기 접점 수량 2, 가격 14, ATC 최저 수량 4. |
+| [cvp-break-even.svg](cvp-break-even.svg) | 「원가·조업도·이익 분석」. 매출 10Q, 총원가 400+6Q. 100개에서 손익분기, 150개에서 이익 200. |
+| [cash-flow-indirect.svg](cash-flow-indirect.svg) | 「현금흐름표」. 순이익 266에 감가상각 30과 미지급이자 4를 더하고 미회수 매출채권 100을 빼면 영업현금흐름 200. |
+| [consolidation-inventory.svg](consolidation-inventory.svg) | 「연결재무제표」. 원가 60을 100에 내부 판매하고 기말까지 보유. 연결에서 미실현이익 40을 제거. |
+| [revenue-coupon-allocation.svg](revenue-coupon-allocation.svg) | 「수익 인식」. 대가 100을 개별판매가격 100 대 25로 배분해 본품 수익 80, 계약부채 20. |
 
 2026-11-02. 모든 그래프는 설명용 가정에 따른 그림이며 관측 통계·투자 예측·임상 결과가 아니다. PNG는 `scripts/build-graphs.py`에서 Matplotlib로 작성했다. 수치와 계산 검사는 `graph-data.json`에 기록했다.
 

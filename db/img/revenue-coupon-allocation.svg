@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 326" role="img" aria-labelledby="title desc">
+<title id="title">본품과 할인권에 거래가격 배분</title>
+<desc id="desc">받은 대가 100을 개별판매가격 100 대 25의 비율로 배분한다. 본품 이전 시 수익 80, 할인권에 계약부채 20을 기록한다.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8abaff"/></marker></defs>
+<rect width="760" height="326" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" text-anchor="middle" fill="#eef5ff">
+<text x="380" y="50" font-size="29" font-weight="700">본품과 할인권에 거래가격 배분</text>
+<rect x="30" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#56e2d4" stroke-width="2"/>
+<text x="133" y="124" font-size="21" font-weight="700" fill="#56e2d4">계약과 대가</text>
+<text x="133" y="157" font-size="17">고객에게 받은 금액 100</text>
+<text x="133" y="185" font-size="17">본품과 추가 할인권</text>
+<rect x="277" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#c4a8fb" stroke-width="2"/>
+<text x="380" y="124" font-size="21" font-weight="700" fill="#c4a8fb">개별판매가격 비중</text>
+<text x="380" y="157" font-size="17">본품 100 ÷ 125 = 80%</text>
+<text x="380" y="185" font-size="17">할인권 25 ÷ 125 = 20%</text>
+<rect x="524" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#8abaff" stroke-width="2"/>
+<text x="627" y="124" font-size="21" font-weight="700" fill="#8abaff">본품 이전 시</text>
+<text x="627" y="157" font-size="17">수익 80 인식</text>
+<text x="627" y="185" font-size="17">할인권 계약부채 20</text>
+<path d="M242 163h27m220 0h27" fill="none" stroke="#8abaff" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="380" y="283" font-size="17" fill="#c8d5e9">할인권은 별도 수행의무인 중요한 권리라고 가정</text>
+</g></svg>

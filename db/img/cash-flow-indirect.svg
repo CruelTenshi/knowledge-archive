@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 326" role="img" aria-labelledby="title desc">
+<title id="title">간접법으로 순이익에서 영업현금까지</title>
+<desc id="desc">순이익 266에 비현금 감가상각 30을 더하고, 미회수 매출채권 100을 빼고 미지급이자 4를 더하면 영업현금흐름 200이다.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8abaff"/></marker></defs>
+<rect width="760" height="326" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" text-anchor="middle" fill="#eef5ff">
+<text x="380" y="50" font-size="29" font-weight="700">간접법으로 순이익에서 영업현금까지</text>
+<rect x="30" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#56e2d4" stroke-width="2"/>
+<text x="133" y="124" font-size="21" font-weight="700" fill="#56e2d4">손익에서 출발</text>
+<text x="133" y="157" font-size="17">수익 300 − 비용 34</text>
+<text x="133" y="185" font-size="17">순이익 266</text>
+<rect x="277" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#c4a8fb" stroke-width="2"/>
+<text x="380" y="124" font-size="21" font-weight="700" fill="#c4a8fb">현금과의 차이 조정</text>
+<text x="380" y="157" font-size="17">감가상각 +30</text>
+<text x="380" y="185" font-size="17">매출채권 증가 −100</text>
+<text x="380" y="213" font-size="17">미지급이자 증가 +4</text>
+<rect x="524" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#8abaff" stroke-width="2"/>
+<text x="627" y="124" font-size="21" font-weight="700" fill="#8abaff">영업현금흐름</text>
+<text x="627" y="157" font-size="17">266 + 30 − 100 + 4</text>
+<text x="627" y="185" font-size="17">고객 현금 수취 200</text>
+<path d="M242 163h27m220 0h27" fill="none" stroke="#8abaff" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="380" y="283" font-size="17" fill="#c8d5e9">세금과 다른 영업현금 지급은 없는 가상 사례</text>
+</g></svg>

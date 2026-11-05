@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 326" role="img" aria-labelledby="title desc">
+<title id="title">연결재무제표의 내부거래 제거</title>
+<desc id="desc">그룹의 A가 원가 60의 재고를 그룹의 B에게 100에 팔고 B는 기말까지 보유한다. 연결재무제표에서 내부매출 100과 미실현이익 40을 제거해 재고를 그룹 원가 60으로 표시한다.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8abaff"/></marker></defs>
+<rect width="760" height="326" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" text-anchor="middle" fill="#eef5ff">
+<text x="380" y="50" font-size="29" font-weight="700">연결재무제표의 내부거래 제거</text>
+<rect x="30" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#56e2d4" stroke-width="2"/>
+<text x="133" y="124" font-size="21" font-weight="700" fill="#56e2d4">그룹 내 판매자 A</text>
+<text x="133" y="157" font-size="17">원가 60</text>
+<text x="133" y="185" font-size="17">내부 판매가 100</text>
+<text x="133" y="213" font-size="17">장부에 이익 40</text>
+<rect x="277" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#c4a8fb" stroke-width="2"/>
+<text x="380" y="124" font-size="21" font-weight="700" fill="#c4a8fb">그룹 내 구매자 B</text>
+<text x="380" y="157" font-size="17">재고를 100에 매입</text>
+<text x="380" y="185" font-size="17">기말까지 외부 판매 없음</text>
+<rect x="524" y="89" width="206" height="151" rx="14" fill="#172348" stroke="#8abaff" stroke-width="2"/>
+<text x="627" y="124" font-size="21" font-weight="700" fill="#8abaff">연결재무제표</text>
+<text x="627" y="157" font-size="17">내부 매출 100 제거</text>
+<text x="627" y="185" font-size="17">미실현이익 40 제거</text>
+<text x="627" y="213" font-size="17">그룹 재고 60</text>
+<path d="M242 163h27m220 0h27" fill="none" stroke="#8abaff" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="380" y="283" font-size="17" fill="#c8d5e9">외부 고객에게 판매하는 시점에 그룹 관점의 매출과 원가를 기록</text>
+</g></svg>

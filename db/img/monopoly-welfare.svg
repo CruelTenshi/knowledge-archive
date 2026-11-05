@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 455" role="img" aria-labelledby="title desc">
+<title id="title">독점의 생산량과 사중손실</title>
+<desc id="desc">수요 P=100−Q, 한계수입 MR=100−2Q, 한계비용 MC=20. 독점은 Q=40, P=60이며 경쟁 기준은 Q=80, P=20이다. 그 사이의 사중손실은 800이다.</desc>
+<rect width="760" height="455" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" fill="#eef5ff">
+<text x="380" y="46" text-anchor="middle" font-size="27" font-weight="700">독점의 생산량과 사중손실</text>
+<path d="M91 100V354H680" fill="none" stroke="#8abaff" stroke-width="2"/>
+<text x="91" y="86" font-size="17">단위당 금액</text>
+<text x="679" y="383" text-anchor="end" font-size="17">산출량</text>
+<text x="81" y="376" font-size="15" text-anchor="end" fill="#c8d5e9">0</text>
+<polygon points="309.29,307.82 309.29,215.45 527.57,307.82" fill="#ffcf87" fill-opacity=".34" stroke="#ffcf87" stroke-width="1.5"/>
+<polyline points="91,215.45 309.29,215.45 309.29,354" fill="none" stroke="#63739b" stroke-width="3" stroke-dasharray="6 6" opacity=".9"/>
+<polyline points="527.57,307.82 527.57,354" fill="none" stroke="#63739b" stroke-width="3" stroke-dasharray="6 6" opacity=".9"/>
+<polyline points="91,123.09 636.71,354" fill="none" stroke="#56e2d4" stroke-width="3" />
+<polyline points="91,123.09 363.86,354" fill="none" stroke="#c4a8fb" stroke-width="3" />
+<polyline points="91,307.82 647.63,307.82" fill="none" stroke="#8abaff" stroke-width="3" />
+<circle cx="309.29" cy="215.45" r="5" fill="#56e2d4" stroke="#081027" stroke-width="2"/>
+<circle cx="309.29" cy="307.82" r="5" fill="#c4a8fb" stroke="#081027" stroke-width="2"/>
+<circle cx="527.57" cy="307.82" r="5" fill="#8abaff" stroke="#081027" stroke-width="2"/>
+<text x="494.83" y="273.18" text-anchor="middle" fill="#56e2d4" font-size="17">수요</text>
+<text x="205.6" y="240.85" text-anchor="middle" fill="#c4a8fb" font-size="17">MR</text>
+<text x="653.09" y="298.58" text-anchor="middle" fill="#8abaff" font-size="17">MC</text>
+<text x="391.14" y="277.8" text-anchor="middle" fill="#ffcf87" font-size="17">사중손실</text>
+<text x="80.09" y="224.69" text-anchor="end" fill="#c8d5e9" font-size="17">60</text>
+<text x="80.09" y="314.75" text-anchor="end" fill="#c8d5e9" font-size="17">20</text>
+<text x="309.29" y="377.09" text-anchor="middle" fill="#eef5ff" font-size="17">40</text>
+<text x="527.57" y="377.09" text-anchor="middle" fill="#eef5ff" font-size="17">80</text>
+<text x="380" y="425" text-anchor="middle" font-size="16" fill="#c8d5e9">독점 수량 40 · 경쟁 기준 수량 80 · 사중손실 800</text>
+</g></svg>

@@ -423,7 +423,7 @@
         "경제학",
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "business-ethics",
@@ -542,6 +542,106 @@
       "updatedAt": "2026-11-02"
     },
     {
+      "id": "opportunity-cost",
+      "title": "기회비용",
+      "file": "기회비용.md",
+      "summary": "한 가지를 선택함으로써 포기한 대안 가운데 가장 가치 있는 대안의 가치.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "supply-and-demand",
+      "title": "수요와 공급",
+      "file": "수요와 공급.md",
+      "summary": "가격에 따라 구매량과 판매량이 달라지는 방식과 두 양이 일치하는 시장균형.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "price-elasticity",
+      "title": "가격탄력성",
+      "file": "가격탄력성.md",
+      "summary": "가격이 일정한 비율로 변할 때 수요량이나 공급량이 어느 비율로 반응하는지 나타내는 지표.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "production-costs",
+      "title": "생산비용",
+      "file": "생산비용.md",
+      "summary": "기업이 산출량을 선택할 때 부담하는 자원의 기회비용과 총비용·평균비용·한계비용의 관계.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "perfect-competition",
+      "title": "완전경쟁",
+      "file": "완전경쟁.md",
+      "summary": "많은 구매자와 판매자가 동질적 상품을 거래하며 개별 기업이 시장가격을 주어진 것으로 받아들이는 시장 구조.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "monopoly",
+      "title": "독점",
+      "file": "독점.md",
+      "summary": "관련 시장에 판매자가 하나이고 진입장벽이나 가까운 대체재의 부족으로 가격과 생산량에 영향을 미치는 시장 구조.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "price-discrimination",
+      "title": "가격차별",
+      "file": "가격차별.md",
+      "summary": "구매자의 지불의사나 선택에 따라 원가 차이만으로 설명하기 어려운 서로 다른 가격을 적용하는 전략.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "monopolistic-competition",
+      "title": "독점적 경쟁",
+      "file": "독점적 경쟁.md",
+      "summary": "많은 기업이 서로 대체할 수 있는 차별화된 상품을 팔고 장기에는 진입과 퇴출이 가능한 시장 구조.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "oligopoly",
+      "title": "과점",
+      "file": "과점.md",
+      "summary": "소수의 기업이 서로의 가격·수량·투자 결정과 반응을 고려하며 경쟁하는 시장 구조.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "market-concentration",
+      "title": "시장집중도",
+      "file": "시장집중도.md",
+      "summary": "관련 시장에서 매출이나 공급이 얼마나 적은 기업에 집중되어 있는지 나타내는 시장구조 지표.",
+      "tags": [
+        "경제학"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
       "id": "market-failure",
       "title": "시장실패",
       "file": "시장실패.md",
@@ -549,7 +649,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "externalities",
@@ -652,7 +752,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "prisoners-dilemma",
@@ -853,7 +953,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "venture-capital-ipo",
@@ -963,7 +1063,7 @@
       "tags": [
         "회계"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "accounting-equation",
@@ -973,7 +1073,7 @@
       "tags": [
         "회계"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "accrual-accounting",
@@ -983,7 +1083,7 @@
       "tags": [
         "회계"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "accounting-standards",
@@ -993,7 +1093,217 @@
       "tags": [
         "회계"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "double-entry-bookkeeping",
+      "title": "복식부기",
+      "file": "복식부기.md",
+      "summary": "거래를 차변과 대변에 같은 금액으로 기록해 재무상태와 기간성과를 연결하는 부기 방식.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "cash-flow-statement",
+      "title": "현금흐름표",
+      "file": "현금흐름표.md",
+      "summary": "현금및현금성자산의 변동을 영업·투자·재무활동으로 나누고 이익이 현금으로 전환되는 과정을 보여 주는 재무제표.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "consolidated-financial-statements",
+      "title": "연결재무제표",
+      "file": "연결재무제표.md",
+      "summary": "지배기업과 종속기업의 재무상태와 성과를 하나의 경제적 실체로 표시하는 재무제표.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "segment-reporting",
+      "title": "영업부문",
+      "file": "영업부문.md",
+      "summary": "경영진의 자원 배분과 성과 평가 단위를 기준으로 기업 내부의 사업별 수익과 위험을 드러내는 공시.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "foreign-currency-translation",
+      "title": "외화환산",
+      "file": "외화환산.md",
+      "summary": "외화 거래를 기능통화로 기록하고 해외사업의 재무제표를 공통 표시통화로 바꾸는 회계 처리.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "revenue-recognition",
+      "title": "수익 인식",
+      "file": "수익 인식.md",
+      "summary": "고객에게 약속한 재화나 용역의 통제가 이전되는 시점과 받을 대가에 따라 매출을 기록하는 절차.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "trade-receivables",
+      "title": "매출채권",
+      "file": "매출채권.md",
+      "summary": "외상 판매의 대가를 받을 권리와 그 대가가 실제 현금으로 회수될 가능성을 함께 보여 주는 금융자산.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "inventories",
+      "title": "재고자산",
+      "file": "재고자산.md",
+      "summary": "판매할 상품·제품, 생산 중인 재공품, 생산에 소비할 원재료 등의 원가와 회수 가능액을 기록하는 자산.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "working-capital",
+      "title": "운전자본",
+      "file": "운전자본.md",
+      "summary": "일상 영업에서 재고 매입, 고객 회수, 공급업체 지급 사이에 묶이는 자금.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "cost-volume-profit",
+      "title": "원가·조업도·이익 분석",
+      "file": "원가·조업도·이익 분석.md",
+      "summary": "판매량과 가격, 원가 구조가 손익분기점과 영업이익의 민감도에 미치는 영향을 살피는 방법.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "property-plant-equipment",
+      "title": "유형자산",
+      "file": "유형자산.md",
+      "summary": "생산·공급·임대·관리 목적으로 여러 기간 사용하는 물리적 자원의 취득, 사용, 손상과 처분을 기록하는 자산.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "intangible-assets",
+      "title": "무형자산",
+      "file": "무형자산.md",
+      "summary": "물리적 실체 없이 식별할 수 있고 기업이 통제하는 비화폐성 자원.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "lease-accounting",
+      "title": "리스",
+      "file": "리스.md",
+      "summary": "대가를 지급하고 일정 기간 식별된 자산의 사용을 통제하는 계약.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "employee-benefits",
+      "title": "종업원급여",
+      "file": "종업원급여.md",
+      "summary": "종업원이 제공한 근무에 대해 부담하는 보수와 퇴직·주식기준 보상의 회계 처리.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "financial-assets",
+      "title": "금융자산",
+      "file": "금융자산.md",
+      "summary": "현금, 다른 기업의 지분상품 또는 현금 등 금융자산을 받을 계약상 권리.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "financial-liabilities",
+      "title": "금융부채",
+      "file": "금융부채.md",
+      "summary": "현금이나 다른 금융자산을 인도해야 하는 계약상 의무와 그 장부액의 변화를 기록하는 부채.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "hybrid-securities",
+      "title": "복합금융상품",
+      "file": "복합금융상품.md",
+      "summary": "하나의 발행 계약에 금융부채 요소와 자본 요소가 함께 들어 있는 금융상품.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "earnings-per-share",
+      "title": "주당이익",
+      "file": "주당이익.md",
+      "summary": "보통주 한 주에 귀속되는 기간 이익과 잠재적 주식 희석 효과를 나타내는 지표.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "financial-ratios",
+      "title": "재무비율",
+      "file": "재무비율.md",
+      "summary": "기업의 유동성·수익성·효율·재무위험을 공통 기준으로 비교하고 성과의 원천을 분해하는 지표.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "earnings-quality",
+      "title": "이익의 질",
+      "file": "이익의 질.md",
+      "summary": "보고이익이 실제 거래와 지속 가능한 사업 성과, 현금 창출력을 얼마나 충실히 나타내는지 판단하는 관점.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "id": "business-valuation",
+      "title": "기업가치평가",
+      "file": "기업가치평가.md",
+      "summary": "기업의 미래 현금흐름 또는 장부가를 초과하는 미래 이익을 현재가치로 환산하는 방법.",
+      "tags": [
+        "회계"
+      ],
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "integrated-reporting",
@@ -1265,7 +1575,7 @@
       "tags": [
         "국제경영"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "current-account",

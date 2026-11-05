@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 455" role="img" aria-labelledby="title desc">
+<title id="title">매출과 총원가의 손익분기점</title>
+<desc id="desc">판매가격 10, 단위변동원가 6, 고정비 400. 매출과 총원가는 판매량 100에서 1000으로 같다. 판매량 150이면 이익은 200이다.</desc>
+<rect width="760" height="455" rx="24" fill="#081027"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" fill="#eef5ff">
+<text x="380" y="46" text-anchor="middle" font-size="27" font-weight="700">매출과 총원가의 손익분기점</text>
+<path d="M91 100V354H680" fill="none" stroke="#8abaff" stroke-width="2"/>
+<text x="91" y="86" font-size="17">총금액</text>
+<text x="679" y="383" text-anchor="end" font-size="17">판매량</text>
+<text x="81" y="376" font-size="15" text-anchor="end" fill="#c8d5e9">0</text>
+<polygon points="428.06,204.59 596.59,159.76 596.59,129.88" fill="#56e2d4" fill-opacity=".34" stroke="#56e2d4" stroke-width="1.5"/>
+<polyline points="91,204.59 428.06,204.59 428.06,354" fill="none" stroke="#63739b" stroke-width="3" stroke-dasharray="6 6" opacity=".9"/>
+<polyline points="596.59,159.76 596.59,354" fill="none" stroke="#63739b" stroke-width="3" stroke-dasharray="6 6" opacity=".9"/>
+<polyline points="91,354 630.29,114.94" fill="none" stroke="#56e2d4" stroke-width="3" />
+<polyline points="91,294.24 647.15,146.32" fill="none" stroke="#c4a8fb" stroke-width="3" />
+<circle cx="428.06" cy="204.59" r="5" fill="#ffcf87" stroke="#081027" stroke-width="2"/>
+<circle cx="596.59" cy="129.88" r="5" fill="#56e2d4" stroke="#081027" stroke-width="2"/>
+<circle cx="596.59" cy="159.76" r="5" fill="#c4a8fb" stroke="#081027" stroke-width="2"/>
+<text x="593.22" y="111.95" text-anchor="middle" fill="#56e2d4" font-size="17">매출</text>
+<text x="559.51" y="185.16" text-anchor="middle" fill="#c4a8fb" font-size="17">총원가</text>
+<text x="377.5" y="179.19" text-anchor="middle" fill="#ffcf87" font-size="17">손익분기</text>
+<text x="80.89" y="300.21" text-anchor="end" fill="#c8d5e9" font-size="17">400</text>
+<text x="80.89" y="211.31" text-anchor="end" fill="#c8d5e9" font-size="17">1,000</text>
+<text x="428.06" y="377.91" text-anchor="middle" fill="#eef5ff" font-size="17">100</text>
+<text x="596.59" y="377.91" text-anchor="middle" fill="#eef5ff" font-size="17">150</text>
+<text x="380" y="425" text-anchor="middle" font-size="16" fill="#c8d5e9">100개에서 손익분기 · 150개에서 매출 1,500, 총원가 1,300</text>
+</g></svg>
