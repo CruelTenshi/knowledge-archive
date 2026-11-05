@@ -78,6 +78,44 @@ test("태그는 실제 등록값에서 중복 없이 정렬되며 필터는 검�
   assert.equal(C.matchesTag(docs[2], ""), true);
   assert.deepEqual(docs.filter(d => C.matchesTag(d, "국제정치") && C.matches(d, "억제", "핵억제")), [docs[0]]);
 });
+
+test("검색 관련도는 제목 완전일치·앞부분·포함·태그·요약·본문 순으로 정렬한다", () => {
+  const docs = [
+    {id:"body", title:"가나다"},
+    {id:"summary", title:"나라마", summary:"재무제표를 읽는 방법"},
+    {id:"tag", title:"다라마", tags:["재무제표"]},
+    {id:"contains", title:"연결재무제표"},
+    {id:"prefix", title:"재무제표 분석"},
+    {id:"exact", title:"재무제표"},
+    {id:"missing", title:"없는 문서"}
+  ];
+  const bodies = new Map([["body", "재무제표 ".repeat(1000)]]);
+  assert.deepEqual(ids(C.sortByRelevance(docs, "재무제표", bodies)),
+    ["exact","prefix","contains","tag","summary","body"]);
+  assert.deepEqual(ids(C.sortByRelevance([...docs].reverse(), "재무 제표", bodies)),
+    ["exact","prefix","contains","tag","summary","body"]);
+  assert.equal(docs[0].id, "body");
+  assert.equal(C.searchScore(docs[5], "재무제표"), 10000);
+  assert.equal(C.searchScore({title:"ＡＩ"}, "ai"), 10000);
+});
+
+test("여러 검색어는 필드에 걸쳐 모두 일치해야 하며 제목 일치 수와 동일 점수의 제목순을 반영한다", () => {
+  const docs = [
+    {id:"body", title:"다", summary:"현금", tags:["회계"]},
+    {id:"some-title", title:"현금", summary:"흐름", tags:["회계"]},
+    {id:"all-title", title:"흐름과 현금"},
+    {id:"exact", title:"현금 흐름"},
+    {id:"tie-b", title:"나", summary:"현금 흐름"},
+    {id:"tie-a", title:"가", summary:"현금 흐름"},
+    {id:"missing", title:"현금"}
+  ];
+  const bodies = new Map([["body", "흐름"]]);
+  assert.deepEqual(ids(C.sortByRelevance(docs, "현금 흐름", bodies)),
+    ["exact","all-title","some-title","tie-a","tie-b","body"]);
+  assert.equal(C.matches({title:"현금"}, "현금 없는말"), false);
+  assert.equal(C.matches({title:"현금"}, "현금 현금"), true);
+  assert.deepEqual(ids(C.sortByRelevance(docs.slice(0,2), "")), ["body","some-title"]);
+});
 test("모든 등록 문서는 중복 없는 ID와 실제 md 원본을 갖는다", async () => {
   const context = { window: {} };
   vm.runInNewContext(await fs.readFile(path.join(root, "db.js"), "utf8"), context);

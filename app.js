@@ -17,8 +17,8 @@
   let home = C.selectHome(articles, currentDay);
   let randomOrder = C.shuffle(articles);
   let routeVersion = 0;
-  let searchTimer;
   let bodyIndex;
+  const searchBoxes = [];
   let lastBrowseRoute = "#/";
 
   function docHref(article, section = "") {
@@ -29,7 +29,11 @@
     const params = new URLSearchParams(query);
     let id = "";
     try { id = decodeURIComponent(path.slice(5)); } catch { /* 잘못된 주소는 없는 문서로 표시 */ }
-    return { path, params, id, query: params.get("q") || "", tag: params.get("tag") || "", sort: ["random", "daily", "updated"].includes(params.get("sort")) ? params.get("sort") : "name" };
+    const queryText = params.get("q") || "";
+    const requestedSort = params.get("sort");
+    const sort = ["name", "random", "daily", "updated", "relevance"].includes(requestedSort)
+      ? requestedSort : queryText.trim() ? "relevance" : "name";
+    return { path, params, id, query: queryText, tag: params.get("tag") || "", sort: !queryText.trim() && sort === "relevance" ? "name" : sort };
   }
   function card(article, index) {
     return `<a class="document-card" href="${esc(docHref(article))}"><span class="card-fx" aria-hidden="true"></span><div class="document-card-top"><span class="document-tags">${article.tags.map(tag => `<span>${esc(tag)}</span>`).join("")}</span><span class="document-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span></div><h3>${esc(article.title)}</h3><p>${esc(article.summary || "아카이브의 문서를 읽어보세요.")}</p><span class="document-card-bottom"><span>문서 읽기</span><svg class="icon"><use href="#i-arrow"/></svg></span></a>`;
@@ -70,8 +74,115 @@
     }
     return bodyIndex;
   }
+  function setupSearchSuggestions(input) {
+    const form = input.form;
+    const dropdown = document.createElement("div");
+    dropdown.className = "search-dropdown";
+    dropdown.hidden = true;
+    const list = document.createElement("ul");
+    list.id = input.id + "-suggestions";
+    list.className = "search-suggestions";
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", "검색 문서");
+    const status = document.createElement("p");
+    status.className = "suggestion-status";
+    status.setAttribute("role", "status");
+    const allResults = document.createElement("button");
+    allResults.type = "submit";
+    allResults.className = "suggestion-all";
+    allResults.textContent = "전체 검색 결과 보기 →";
+    dropdown.append(list, status, allResults);
+    form.append(dropdown);
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-controls", list.id);
+    input.setAttribute("aria-expanded", "false");
+    let timer;
+    let revision = 0;
+    let visible = [];
+    let active = -1;
+    function close() {
+      clearTimeout(timer);
+      revision++;
+      dropdown.hidden = true;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+      active = -1;
+    }
+    function select(index) {
+      active = index;
+      const options = list.querySelectorAll('[role="option"]');
+      options.forEach((option, i) => option.setAttribute("aria-selected", String(i === active)));
+      if (active < 0) input.removeAttribute("aria-activedescendant");
+      else {
+        input.setAttribute("aria-activedescendant", options[active].id);
+        options[active].scrollIntoView({ block: "nearest" });
+      }
+    }
+    function paint(results, loading, failed = 0) {
+      const opening = dropdown.hidden;
+      const selected = visible[active]?.id;
+      visible = results.slice(0, 6);
+      list.innerHTML = visible.map(article =>
+        '<li role="presentation"><a role="option" aria-selected="false" tabindex="-1" id="' +
+        esc(input.id + "-suggestion-" + article.id) + '" href="' + esc(docHref(article)) + '">' +
+        '<strong>' + esc(article.title) + '</strong><span>' + esc(article.summary || "") + '</span></a></li>'
+      ).join("");
+      select(visible.findIndex(article => article.id === selected));
+      const message = results.length
+        ? results.length + "개 문서 중 " + visible.length + "개를 표시합니다."
+        : "일치하는 문서가 없습니다.";
+      status.textContent = loading ? "본문도 검색하고 있어요…" :
+        message + (failed ? " 일부 본문을 읽지 못했습니다." : "");
+      dropdown.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      if (opening) dropdown.scrollIntoView({ block: "nearest", behavior: "instant" });
+    }
+    function queue() {
+      clearTimeout(timer);
+      const request = ++revision;
+      const query = input.value.trim();
+      if (!query) { close(); return; }
+      timer = setTimeout(async () => {
+        const candidates = articles.filter(article => C.matchesTag(article, route().tag));
+        paint(C.sortByRelevance(candidates, query), true);
+        const {index, failed} = await buildIndex();
+        if (request !== revision) return;
+        paint(C.sortByRelevance(candidates, query, index), false, failed.length);
+      }, 160);
+    }
+    input.addEventListener("input", event => { if (event.isComposing) close(); else queue(); });
+    input.addEventListener("compositionstart", close);
+    input.addEventListener("compositionend", queue);
+    input.addEventListener("focus", queue);
+    list.addEventListener("click", close);
+    input.addEventListener("keydown", event => {
+      if (event.isComposing || dropdown.hidden) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        close();
+      } else if ((event.key === "ArrowDown" || event.key === "ArrowUp") && visible.length) {
+        event.preventDefault();
+        const direction = event.key === "ArrowDown" ? 1 : -1;
+        const firstOption = direction > 0 ? 0 : visible.length - 1;
+        const nextOption = active < 0 ? firstOption : (active + direction + visible.length) % visible.length;
+        select(nextOption);
+      } else if (event.key === "Enter" && active >= 0) {
+        event.preventDefault();
+        const article = visible[active];
+        close();
+        location.hash = docHref(article);
+      }
+    });
+    form.addEventListener("focusout", () => {
+      setTimeout(() => { if (!form.contains(document.activeElement)) close(); }, 0);
+    });
+    searchBoxes.push({form, close});
+  }
   async function renderList(state, version) {
     const query = state.query.trim();
+    $("sort-select").querySelector('[value="relevance"]').hidden = !query;
     $("sort-select").value = state.sort;
     // 과거 URL의 태그가 목록에서 사라져도 선택 조건을 숨기지 않습니다.
     const filterTags = state.tag && !tags.includes(state.tag) ? [...tags, state.tag] : tags;
@@ -83,12 +194,18 @@
     const count = document.createElement("span");
     heading.append(count);
     const inTag = article => C.matchesTag(article, state.tag);
+    let searchBodies = new Map();
     let results = articles.filter(article => inTag(article) && (!query || C.matches(article, query)));
     const paint = () => {
       const ids = new Set(results.map(article => article.id));
-      if (state.sort === "daily") results = C.sortByDailyRandom(articles, currentDay).filter(article => ids.has(article.id));
+      if (state.sort === "relevance") results = C.sortByRelevance(results, query, searchBodies);
+      else if (state.sort === "daily") results = C.sortByDailyRandom(articles, currentDay).filter(article => ids.has(article.id));
       else if (state.sort === "random") results = randomOrder.filter(article => ids.has(article.id));
       else results = state.sort === "updated" ? C.sortByUpdated(results) : C.sortByName(results);
+      if (query && state.sort !== "relevance") {
+        results.sort((a, b) =>
+          Number(C.searchScore(b, query) === 10000) - Number(C.searchScore(a, query) === 10000));
+      }
       fillGrid("list-grid", results);
       count.textContent = results.length;
       $("list-empty").hidden = results.length > 0;
@@ -99,6 +216,7 @@
     if (query) {
       const { index, failed } = await buildIndex();
       if (version !== routeVersion) return;
+      searchBodies = index;
       results = articles.filter(article => inTag(article) && C.matches(article, query, index.get(article.id) || ""));
       paint();
       $("search-status").textContent = `${results.length}개의 문서를 찾았습니다.${failed.length ? ` ${failed.length}개 파일을 읽지 못해 해당 문서는 제목·태그·요약만 검색했습니다.` : " 제목·태그·요약·본문에서 검색했습니다."}`;
@@ -394,7 +512,7 @@
   }
   function render() {
     closeFootnote(false);
-    clearTimeout(searchTimer);
+    searchBoxes.forEach(box => box.close());
     const version = ++routeVersion;
     const state = route();
     refreshDay();
@@ -415,12 +533,12 @@
     if (isList) renderList(state, version); else updateHome();
   }
   function submitSearch(input = $("search-input")) {
-    clearTimeout(searchTimer);
+    searchBoxes.forEach(box => box.close());
     const value = input.value.trim();
     const state = route();
     const params = new URLSearchParams();
     if (value) params.set("q", value);
-    if (state.sort !== "name") params.set("sort", state.sort);
+    if (state.sort !== "relevance" && (value === state.query || !value)) params.set("sort", state.sort);
     if (state.tag) params.set("tag", state.tag);
     const path = state.path === "/all" || state.tag ? "/all" : value ? "/search" : "/";
     const hash = `#${path}${params.size ? `?${params}` : ""}`;
@@ -438,8 +556,11 @@
     if (!$("document-search-input").value.trim()) return;
     submitSearch($("document-search-input"));
   });
-  $("search-input").addEventListener("input", event => { clearTimeout(searchTimer); if (!event.isComposing) searchTimer = setTimeout(submitSearch, 350); });
-  $("search-input").addEventListener("compositionend", () => { clearTimeout(searchTimer); searchTimer = setTimeout(submitSearch, 350); });
+  setupSearchSuggestions($("search-input"));
+  setupSearchSuggestions($("document-search-input"));
+  document.addEventListener("pointerdown", event => {
+    searchBoxes.forEach(box => { if (!box.form.contains(event.target)) box.close(); });
+  });
   $("reshuffle-button").addEventListener("click", () => { refreshDay(); home = C.selectHome(articles, currentDay); updateHome(); announce("우연한 발견 문서를 다시 뽑았습니다."); });
   $("random-button").addEventListener("click", openRandom);
   $("next-random-button").addEventListener("click", openRandom);

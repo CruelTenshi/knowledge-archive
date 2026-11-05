@@ -63,9 +63,37 @@
     }
     return { byId, byName, byPath };
   }
+  function searchScore(article, query, body = "") {
+    const normalized = normalize(query);
+    if (!normalized) return 0;
+    const compact = value => normalize(value).replace(/\s/g, "");
+    const terms = [...new Set(normalized.split(" ").map(compact))];
+    const phrase = compact(normalized);
+    const fields = [article.title, (article.tags || []).join(" "), article.summary || "", body].map(compact);
+    if (!terms.every(term => fields.some(field => field.includes(term)))) return -1;
+    const [title, tags, summary, content] = fields;
+    if (title === phrase) return 10000;
+    if (title.startsWith(phrase)) return 9000;
+    if (title.includes(phrase)) return 8000;
+    const titleMatches = terms.filter(term => title.includes(term)).length;
+    if (titleMatches === terms.length) return 7000;
+    if (titleMatches) return 6000 + titleMatches / terms.length * 100;
+    if (terms.every(term => tags.includes(term))) return 5000;
+    if (terms.some(term => tags.includes(term))) return 4000;
+    if (terms.every(term => summary.includes(term))) return 3000;
+    if (terms.some(term => summary.includes(term))) return 2000;
+    return content.includes(phrase) ? 1100 : 1000;
+  }
   function matches(article, query, body = "") {
-    const haystack = normalize([article.title, article.summary || "", ...(article.tags || []), body].join(" "));
-    return normalize(query).split(" ").filter(Boolean).every(term => haystack.includes(term));
+    return searchScore(article, query, body) >= 0;
+  }
+  function sortByRelevance(articles, query, bodies = new Map()) {
+    return sortByName(articles).map(article => ({
+      article,
+      score: searchScore(article, query, bodies.get(article.id) || "")
+    })).filter(result => result.score >= 0)
+      .sort((a, b) => b.score - a.score)
+      .map(result => result.article);
   }
   function collectTags(articles) {
     return [...new Set(articles.flatMap(article => article.tags || []).filter(Boolean))]
@@ -84,7 +112,7 @@
     });
   }
   function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
-  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, createArticleIndex, matches, collectTags, matchesTag, sortByName, sortByUpdated, sortByDailyRandom, escapeHTML };
+  const api = { hash, seededRandom, shuffle, dateKey, selectHome, normalize, createArticleIndex, matches, searchScore, sortByRelevance, collectTags, matchesTag, sortByName, sortByUpdated, sortByDailyRandom, escapeHTML };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.ArchiveCore = Object.freeze(api);
 })(globalThis);
