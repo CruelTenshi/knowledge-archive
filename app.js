@@ -116,16 +116,11 @@
     return article ? `<a href="${esc(docHref(article, sections.length ? sections.join("#") : resolved.section))}">${esc(caption)}</a>` : `<span class="missing-link" title="등록되지 않은 문서">${esc(caption)}</span>`;
   }
   function renderWikiTemplate(key) {
-    const template = window.ARCHIVE_TEMPLATES[key];
     if (!Object.hasOwn(window.ARCHIVE_TEMPLATES, key)) return '<p class="missing-link">등록되지 않은 틀: ' + esc(key) + '</p>';
-    const groups = template.groups.map(group => {
-      const links = group.articles.map(id => {
-        const article = byId.get(id)?.article;
-        return article ? '<li><a href="' + esc(docHref(article)) + '">' + esc(article.title) + '</a></li>' : "";
-      }).join("");
-      return '<div class="wiki-template-group"><strong>' + esc(group.label) + '</strong><ul>' + links + '</ul></div>';
-    }).join("");
-    return '<nav class="wiki-template" aria-label="' + esc(template.title) + '"><strong class="wiki-template-title">' + esc(template.title) + '</strong>' + groups + '</nav>';
+    return window.ArchiveMarkdown.renderTemplate(window.ARCHIVE_TEMPLATES[key], id => {
+      const article = byId.get(id)?.article;
+      return article ? '<a href="' + esc(docHref(article)) + '">' + esc(article.title) + '</a>' : "";
+    });
   }
   const markdown = window.ArchiveMarkdown.createParser(marked, markedFootnote, wikiLink, renderWikiTemplate);
   function markdownFragment(source) {

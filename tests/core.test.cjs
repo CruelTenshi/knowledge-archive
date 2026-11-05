@@ -135,6 +135,44 @@ test("문서 제목·목록·위키 링크와 절 참조가 정리된 구조와 
     }
   }
 });
+test("읽기 흐름의 문서·단계·첨부가 일치하고 분야 탐색 틀도 유효하다", async () => {
+  const context = {window: {}};
+  vm.runInNewContext(await fs.readFile(path.join(root, "db.js"), "utf8"), context);
+  vm.runInNewContext(await fs.readFile(path.join(root, "wiki-templates.js"), "utf8"), context);
+  const articles = context.window.KNOWLEDGE_DB.articles;
+  const templates = context.window.ARCHIVE_TEMPLATES;
+  const sources = new Map(await Promise.all(articles.map(async article =>
+    [article.id, await fs.readFile(path.join(root, "db", article.file), "utf8")])));
+  for (const [key, template] of Object.entries(templates)) {
+    assert.ok(template.title);
+    const ids = template.groups.flatMap(group => {
+      assert.ok(group.label);
+      assert.ok(group.articles.length);
+      return Array.from(group.articles);
+    });
+    assert.equal(new Set(ids).size, ids.length, key);
+    for (const id of ids) assert.ok(sources.has(id), key + ": " + id);
+    if (template.flow) {
+      assert.ok(template.description, key);
+      assert.ok(template.groups.length >= 2, key);
+      for (const id of ids) {
+        assert.ok(sources.get(id).includes("{{틀:" + key + "}}"), key + ": " + id);
+      }
+    }
+  }
+  for (const [id, source] of sources) {
+    const keys = [...source.matchAll(/^\{\{틀:([a-z0-9-]+)\}\}\r?$/gm)].map(match => match[1]);
+    assert.equal(keys.length, new Set(keys).size, id);
+    for (const key of keys) {
+      assert.ok(Object.hasOwn(templates, key), id + ": " + key);
+      if (templates[key].flow) {
+        assert.ok(templates[key].groups.some(group => group.articles.includes(id)), id + ": " + key);
+        assert.ok(source.indexOf("{{틀:" + key + "}}") < source.indexOf("\n## "), id + ": " + key);
+      }
+    }
+  }
+});
+
 test("HTTP에서 md를 읽고, 실패한 읽기는 다음 호출에서 재시도한다", async () => {
   let requests = 0;
   const store = createStore({ baseURL: "http://localhost/db/", fetch: async url => {

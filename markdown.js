@@ -41,6 +41,23 @@
     }] });
     return parser;
   }
+  function renderTemplate(template, renderArticle) {
+    const groups = template.groups.map((group, index) => {
+      const links = group.articles.map(id => {
+        const link = renderArticle(id);
+        return link ? "<li>" + link + "</li>" : "";
+      }).join("");
+      if (template.flow) {
+        return '<li class="wiki-flow-stage"><span class="wiki-flow-number" aria-hidden="true">' + (index + 1) + '</span><div><strong class="wiki-flow-label">' + escape(group.label) + '</strong><ul>' + links + '</ul></div></li>';
+      }
+      return '<div class="wiki-template-group"><strong>' + escape(group.label) + '</strong><ul>' + links + '</ul></div>';
+    }).join("");
+    const title = escape(template.title);
+    if (template.flow) {
+      return '<nav class="wiki-template wiki-reading-flow" aria-label="' + title + ' 읽기 흐름"><details><summary class="wiki-template-title">읽기 흐름 · ' + title + '</summary><p class="wiki-flow-description">' + escape(template.description) + '</p><p class="wiki-flow-guide">번호 순서로 읽으며, 같은 단계의 문서는 함께 참고합니다.</p><ol class="wiki-flow-steps">' + groups + '</ol></details></nav>';
+    }
+    return '<nav class="wiki-template" aria-label="' + title + '"><strong class="wiki-template-title">' + title + '</strong>' + groups + '</nav>';
+  }
   function numberHeadings(headings) {
     const stack = [];
     return headings.map(heading => {
@@ -51,7 +68,7 @@
       return { ...heading, number: stack.map(item => item.count).join("."), depth: stack.length - 1 };
     });
   }
-  const api = { createParser, numberHeadings };
+  const api = { createParser, renderTemplate, numberHeadings };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.ArchiveMarkdown = Object.freeze(api);
 })(globalThis);

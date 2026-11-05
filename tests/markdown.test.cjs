@@ -6,6 +6,36 @@ const katex = require('../vendor/katex/katex.js');
 const { createParser, numberHeadings } = require('../markdown.js');
 const parser = () => createParser(marked, footnote, text => `<a href="#/doc/test">${text}</a>`);
 
+test('읽기 흐름은 순서와 병렬 문서, 여러 틀, 코드의 원문을 보존한다', () => {
+  const {renderTemplate} = require('../markdown.js');
+  const templates = {
+    first: {flow:true, title:'회계 <기초>', description:'보고 & 기록', groups:[
+      {label:'보고서 <읽기>', articles:['statements']},
+      {label:'거래', articles:['equation','bookkeeping']}
+    ]},
+    second: {flow:true, title:'연결', description:'그룹으로 확장', groups:[
+      {label:'기초', articles:['statements']},
+      {label:'확장', articles:['consolidation']}
+    ]},
+    category: {title:'분야 탐색', groups:[{label:'문서', articles:['statements']}]}
+  };
+  const p = createParser(marked, footnote, text => text, key =>
+    renderTemplate(templates[key], id => '<a href="#/doc/' + id + '">' + id + '</a>'));
+  const html = p.parse('{{틀:first}}\n\n{{틀:second}}\n\n{{틀:category}}\n\n~~~text\n{{틀:first}}\n~~~');
+  assert.equal((html.match(/class="wiki-template wiki-reading-flow"/g) || []).length, 2);
+  assert.equal((html.match(/class="wiki-flow-steps"/g) || []).length, 2);
+  assert.equal((html.match(/class="wiki-flow-stage"/g) || []).length, 4);
+  assert.equal((html.match(/<details>/g) || []).length, 2);
+  assert.doesNotMatch(html, /<details open/);
+  assert.match(html, /회계 &lt;기초&gt;/);
+  assert.match(html, /보고 &amp; 기록/);
+  assert.match(html, /보고서 &lt;읽기&gt;/);
+  assert.ok(html.indexOf('href="#/doc/statements"') < html.indexOf('href="#/doc/equation"'));
+  assert.ok(html.indexOf('href="#/doc/equation"') < html.indexOf('href="#/doc/bookkeeping"'));
+  assert.match(html, /class="wiki-template-group"/);
+  assert.match(html, /<code class="language-text">\{\{틀:first\}\}/);
+});
+
 test('인라인·블록 수식과 역슬래시 구분자를 마크다운 변형 없이 보존한다', () => {
   const p = parser();
   for (const source of [String.raw`문장 $x_i^2 + \frac{a}{b}$ 끝`, String.raw`\(x_i\)`, '$$\n\\begin{aligned}\na&=b+c\\\\\nd&=e\n\\end{aligned}\n$$', String.raw`\[\sum_{i=1}^{n} i\]`]) {

@@ -18,7 +18,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "critical-thinking",
@@ -39,7 +39,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "deductive-reasoning",
@@ -49,7 +49,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "inductive-reasoning",
@@ -60,7 +60,7 @@
         "논리학",
         "분석"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "abduction",
@@ -71,7 +71,7 @@
         "논리학",
         "분석"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "necessary-sufficient",
@@ -81,7 +81,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "propositional-logic",
@@ -91,7 +91,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "categorical-proposition",
@@ -101,7 +101,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "categorical-syllogism",
@@ -111,7 +111,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "intension-extension",
@@ -121,7 +121,7 @@
       "tags": [
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "ambiguity-vagueness",
@@ -194,7 +194,7 @@
         "분석",
         "논리학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "free-will-determinism",
@@ -235,7 +235,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "political-realism",
@@ -266,7 +266,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "interdependence",
@@ -277,7 +277,7 @@
         "국제정치",
         "경제학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "international-system",
@@ -287,7 +287,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "balance-of-power",
@@ -297,7 +297,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "diplomacy",
@@ -317,7 +317,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "functionalism",
@@ -327,7 +327,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "geopolitics",
@@ -347,7 +347,7 @@
       "tags": [
         "국제정치"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "prejudice",
@@ -680,7 +680,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "moral-hazard",
@@ -690,7 +690,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "principal-agent",
@@ -700,7 +700,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "transaction-costs",
@@ -712,7 +712,7 @@
         "국제정치",
         "경제학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "hold-up",
@@ -722,7 +722,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "bounded-rationality",
@@ -732,7 +732,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "incomplete-contracts",
@@ -742,7 +742,7 @@
       "tags": [
         "기업이론"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "incentives",
@@ -763,7 +763,7 @@
         "경제학",
         "국제정치"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "economic-surplus",
@@ -773,7 +773,7 @@
       "tags": [
         "경제학"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "management",
@@ -783,7 +783,7 @@
       "tags": [
         "경영"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "leadership",
@@ -813,7 +813,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "vrio",
@@ -823,7 +823,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "diversification",
@@ -843,7 +843,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "competitive-strategy",
@@ -853,7 +853,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "blue-ocean",
@@ -873,7 +873,7 @@
       "tags": [
         "전략"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "smile-curve",
@@ -913,7 +913,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "risk-return",
@@ -923,7 +923,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "diversification-investing",
@@ -1023,7 +1023,7 @@
       "tags": [
         "재무"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "bank-runs",
@@ -1343,7 +1343,7 @@
       "tags": [
         "운영관리"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "service-operations",
@@ -1353,7 +1353,7 @@
       "tags": [
         "운영관리"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "queuing",
@@ -1363,7 +1363,7 @@
       "tags": [
         "운영관리"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "supply-chain",
@@ -1375,7 +1375,7 @@
         "국제정치",
         "경제학"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "bullwhip-effect",
@@ -1385,7 +1385,7 @@
       "tags": [
         "운영관리"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "causal-inference",
@@ -1395,7 +1395,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "experiments",
@@ -1405,7 +1405,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "difference-in-differences",
@@ -1415,7 +1415,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "phantom-stockouts",
@@ -1435,7 +1435,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "value-proposition",
@@ -1445,7 +1445,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "stp",
@@ -1455,7 +1455,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "marketing-mix",
@@ -1465,7 +1465,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "brand-loyalty",
@@ -1475,7 +1475,7 @@
       "tags": [
         "마케팅"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "market-orientation",
@@ -1495,7 +1495,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "dikw",
@@ -1505,7 +1505,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "platform-network-effects",
@@ -1535,7 +1535,7 @@
       "tags": [
         "분석"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "artificial-intelligence",
@@ -1545,7 +1545,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "ai-management",
@@ -1555,7 +1555,7 @@
       "tags": [
         "정보시스템"
       ],
-      "updatedAt": "2026-11-04"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "comparative-advantage",
@@ -1595,7 +1595,7 @@
       "tags": [
         "국제경영"
       ],
-      "updatedAt": "2026-11-02"
+      "updatedAt": "2026-11-05"
     },
     {
       "id": "foreign-direct-investment",

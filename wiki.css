@@ -64,3 +64,21 @@
 .markdown-body .wiki-template a[aria-current="page"]{color:#e0edf6;font-weight:700;text-decoration:none}
 .wiki-panel a:focus-visible,.wiki-panel summary:focus-visible,.wiki-template a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 @media(max-width:550px){.wiki-panel-content ul{columns:1}.wiki-template-group{grid-template-columns:1fr}}
+.markdown-body .wiki-reading-flow{border-color:#3c5279;background:#0b152b}
+.wiki-reading-flow .wiki-template-title{display:list-item;list-style-position:inside;cursor:pointer;margin:0;color:#dceaff}
+.wiki-reading-flow summary::marker{color:#79baca}
+.wiki-reading-flow summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wiki-reading-flow details[open] .wiki-template-title{padding-bottom:10px}
+.markdown-body .wiki-flow-description,.markdown-body .wiki-flow-guide{margin:0;padding:0 15px 7px;font-size:12px;line-height:1.7}
+.markdown-body .wiki-flow-guide{padding-bottom:14px;color:#92a7c8}
+.markdown-body .wiki-flow-steps{list-style:none;margin:0;padding:0 15px 15px}
+.markdown-body .wiki-flow-stage{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;position:relative;padding:12px 0;margin:0;border-top:1px solid #293a59}
+.wiki-flow-number{display:grid;place-items:center;align-self:start;width:28px;height:28px;border:1px solid #4a608a;border-radius:50%;font:12px var(--mono);color:#bbd5f9;background:#14233e}
+.wiki-flow-stage:not(:last-child)::after{content:"↓";position:absolute;left:7px;bottom:-10px;z-index:1;font-size:17px;line-height:20px;color:#779acb;background:#0b152b}
+.wiki-flow-label{display:block;margin:0 0 5px;color:#a9bfdf;font-size:12px}
+.markdown-body .wiki-flow-stage ul{display:flex;flex-wrap:wrap;gap:6px 10px;list-style:none;margin:0;padding:0}
+.markdown-body .wiki-flow-stage li{margin:0;padding:0;min-width:0}
+.markdown-body .wiki-flow-stage a{display:inline-block;padding:3px 9px;border:1px solid #2b4667;border-radius:5px;line-height:1.7;text-decoration:none;background:#10203a}
+.markdown-body .wiki-flow-stage a:hover{border-color:var(--cyan)}
+.markdown-body .wiki-flow-stage a[aria-current="page"]{border-color:#56e2d4;background:#153b42;color:#b4fff5}
+@media(max-width:550px){.wiki-reading-flow .wiki-template-title{font-size:14px}.markdown-body .wiki-flow-stage{gap:9px}.markdown-body .wiki-flow-stage a{padding:3px 7px}}

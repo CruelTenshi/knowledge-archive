@@ -2,6 +2,8 @@
 
 시장을 나누고 목표고객을 선택한 뒤 고객의 인식 속 위치를 설계하는 과정.
 
+{{틀:marketing-planning}}
+
 ## STP의 세 단계
 **STP**는 시장세분화(Segmentation), 표적시장 선택(Targeting), 포지셔닝(Positioning)의 연결이다.
 
