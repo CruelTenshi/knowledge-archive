@@ -97,12 +97,11 @@
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-controls", list.id);
     input.setAttribute("aria-expanded", "false");
-    let timer;
     let revision = 0;
+    let cachedIndex;
     let visible = [];
     let active = -1;
     function close() {
-      clearTimeout(timer);
       revision++;
       dropdown.hidden = true;
       input.setAttribute("aria-expanded", "false");
@@ -138,23 +137,21 @@
       input.setAttribute("aria-expanded", "true");
       if (opening) dropdown.scrollIntoView({ block: "nearest", behavior: "instant" });
     }
-    function queue() {
-      clearTimeout(timer);
+    async function update() {
       const request = ++revision;
       const query = input.value.trim();
       if (!query) { close(); return; }
-      timer = setTimeout(async () => {
-        const candidates = articles.filter(article => C.matchesTag(article, route().tag));
-        paint(C.sortByRelevance(candidates, query), true);
-        const {index, failed} = await buildIndex();
-        if (request !== revision) return;
-        paint(C.sortByRelevance(candidates, query, index), false, failed.length);
-      }, 160);
+      const candidates = articles.filter(article => C.matchesTag(article, route().tag));
+      const loading = !cachedIndex || cachedIndex.failed.length > 0;
+      paint(C.sortByRelevance(candidates, query, cachedIndex?.index), loading);
+      if (!loading) return;
+      cachedIndex = await buildIndex();
+      if (request !== revision) return;
+      paint(C.sortByRelevance(candidates, query, cachedIndex.index), false, cachedIndex.failed.length);
     }
-    input.addEventListener("input", event => { if (event.isComposing) close(); else queue(); });
-    input.addEventListener("compositionstart", close);
-    input.addEventListener("compositionend", queue);
-    input.addEventListener("focus", queue);
+    input.addEventListener("input", update);
+    input.addEventListener("compositionend", update);
+    input.addEventListener("focus", update);
     list.addEventListener("click", close);
     input.addEventListener("keydown", event => {
       if (event.isComposing || dropdown.hidden) return;
